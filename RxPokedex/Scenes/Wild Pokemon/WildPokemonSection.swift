@@ -2,17 +2,49 @@
 //  WildPokemonSection.swift
 //  RxPokedex
 //
-//  Created by Carlos Brenneisen on 10/27/17.
+//  Created by Carlos Brenneisen on 10/29/17.
 //  Copyright © 2017 carlos.brenneisen. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import RxDataSources
 
-class WildPokemonSection: UICollectionReusableView {
+struct WildPokemonSection {
     
-    @IBOutlet weak var value: UILabel!
+    var header: String
+    var pokemon: [Pokemon]
+    var updated: Date
     
-    static let identifier = "WildPokemonSection"
-    
-    
+    init(header: String, pokemon: [Item], updated: Date) {
+        self.header = header
+        self.pokemon = pokemon
+        self.updated = updated
+    }
 }
+
+extension WildPokemonSection: AnimatableSectionModelType {
+    typealias Item = Pokemon
+    typealias Identity = String
+    
+    var identity: String {
+        return header
+    }
+    
+    var items: [Pokemon] {
+        return pokemon
+    }
+    
+    init(original: WildPokemonSection, items: [Item]) {
+        self = original
+        self.pokemon = items
+    }
+}
+
+extension WildPokemonSection: Equatable {
+    
+    static func == (lhs: WildPokemonSection, rhs: WildPokemonSection) -> Bool {
+        return lhs.header == rhs.header && lhs.items == rhs.items && lhs.updated == rhs.updated
+    }
+}
+
+

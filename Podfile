@@ -13,7 +13,8 @@ target 'RxPokedex' do
     pod 'Alamofire'
     pod 'RxAlamofire'
     pod 'RealmSwift'
-    pod 'RxRealm' 	
+    pod 'RxRealm'
+    pod 'SDWebImage'
 
   target 'RxPokedexTests' do
     inherit! :search_paths

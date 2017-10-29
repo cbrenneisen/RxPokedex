@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Wild Pokemon View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -63,7 +68,7 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="WildPokemonSection" reuseIdentifier="WildPokemonSection" id="F3i-E2-Qn0" customClass="WildPokemonSection" customModule="RxPokedex" customModuleProvider="target">
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="WildPokemonSection" reuseIdentifier="WildPokemonSection" id="F3i-E2-Qn0" customClass="WildPokemonSectionView" customModule="RxPokedex" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="83" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -118,12 +123,50 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="YKa-oe-w7r"/>
+                        <segue destination="2s0-1X-iDA" kind="relationship" relationship="rootViewController" id="f1h-oR-dZu"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uUK-Q0-L2X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.23188405797103" y="132.88043478260872"/>
+            <point key="canvasLocation" x="-822" y="133"/>
+        </scene>
+        <!--Loading View Controller-->
+        <scene sceneID="aZS-bg-dWR">
+            <objects>
+                <viewController id="2s0-1X-iDA" customClass="LoadingViewController" customModule="RxPokedex" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="q2G-ce-V0J">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="lfi-uG-gRL">
+                                <rect key="frame" x="197" y="390" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looking for Pokemon..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTL-ee-dDf">
+                                <rect key="frame" x="20" y="235" width="374" height="35.666666666666686"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.066666666666666666" green="0.066666666666666666" blue="0.066666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="zdk-pS-hJw" firstAttribute="trailing" secondItem="XTL-ee-dDf" secondAttribute="trailing" constant="20" id="7zY-a7-Zkt"/>
+                            <constraint firstItem="XTL-ee-dDf" firstAttribute="leading" secondItem="zdk-pS-hJw" secondAttribute="leading" constant="20" id="8zT-9v-GZZ"/>
+                            <constraint firstItem="lfi-uG-gRL" firstAttribute="centerY" secondItem="zdk-pS-hJw" secondAttribute="centerY" id="9No-Ov-ynP"/>
+                            <constraint firstItem="lfi-uG-gRL" firstAttribute="centerX" secondItem="zdk-pS-hJw" secondAttribute="centerX" id="X6V-MG-sgy"/>
+                            <constraint firstItem="XTL-ee-dDf" firstAttribute="top" secondItem="zdk-pS-hJw" secondAttribute="top" constant="171" id="Ykq-W1-nmg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zdk-pS-hJw"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ydr-Ck-jUF"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="lfi-uG-gRL" id="J1l-8s-bic"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="WildPokemonSegue" id="fyH-5G-cBX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jFp-PM-Bwz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6" y="133"/>
         </scene>
     </scenes>
 </document>

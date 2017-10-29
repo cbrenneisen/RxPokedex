@@ -11,8 +11,30 @@ import RxDataSources
 
 struct Pokemon {
     let uuid: String
+    let name: String
     let image: String
     let date: Date
+    
+    init(realmObj: RealmPokemon){
+        self.uuid = realmObj.name
+        self.name = realmObj.name
+        self.image = realmObj.name
+        self.date = realmObj.date
+    }
+    
+    init?(json: JSONPokemonDetail){
+        
+        guard let name = json.forms.first?.name,
+            let image = json.sprites.values.flatMap({$0}).first else {
+            return nil
+        }
+        
+        let date = Date()
+        self.uuid = String(date.timeIntervalSince1970)
+        self.name = name
+        self.image = image
+        self.date = date
+    }
 }
 
 extension Pokemon: IdentifiableType, Equatable {
