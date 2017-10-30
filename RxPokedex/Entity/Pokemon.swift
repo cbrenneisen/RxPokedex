@@ -10,16 +10,23 @@ import Foundation
 import RxDataSources
 
 struct Pokemon {
-    let uuid: String
+    let number: Int
     let name: String
     let image: String
     let date: Date
     
-    init(realmObj: RealmPokemon){
-        self.uuid = realmObj.name
-        self.name = realmObj.name
-        self.image = realmObj.name
-        self.date = realmObj.date
+//    init(realmObj: RealmPokemon){
+//        self.uuid = realmObj.name
+//        self.name = realmObj.name
+//        self.image = realmObj.name
+//        self.date = realmObj.date
+//    }
+    
+    init(number: Int, name: String, image: String, date: Date){
+        self.number = number
+        self.name = name
+        self.image = image
+        self.date = date
     }
     
     init?(json: JSONPokemonDetail){
@@ -29,25 +36,25 @@ struct Pokemon {
             return nil
         }
         
-        let date = Date()
-        self.uuid = String(date.timeIntervalSince1970)
+        //self.uuid = String(date.timeIntervalSince1970)
         self.name = name
         self.image = image
-        self.date = date
+        self.date = Date()
+        self.number = Int(arc4random_uniform(UInt32.max))
     }
 }
 
 extension Pokemon: IdentifiableType, Equatable {
 
     //TODO: double check if this needs to be a string
-    typealias Identity = String
+    typealias Identity = Int
     
-    var identity: String {
-        return uuid
+    var identity: Int {
+        return number
     }
     
     static func ==(lhs: Pokemon, rhs: Pokemon) -> Bool {
-        return lhs.uuid == rhs.uuid && lhs.date == rhs.date
+        return lhs.number == rhs.number && lhs.date == rhs.date
     }
 }
 

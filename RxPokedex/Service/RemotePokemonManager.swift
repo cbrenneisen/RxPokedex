@@ -32,8 +32,10 @@ final class RemotePokemonManager: RemotePokemonService {
     private let concurrentScheduler = ConcurrentDispatchQueueScheduler(qos: .userInitiated)
     
     private var manager: SessionManager {
-        //set caching preferences here
         let configuration = URLSessionConfiguration.default
+        let cacheLength = 24 * 60 * 60
+        configuration.httpAdditionalHeaders =  ["Cache-Control" : "public, s-maxage=\(cacheLength)"]
+        configuration.requestCachePolicy = .returnCacheDataElseLoad //data is unlikely to change
         return Alamofire.SessionManager(configuration: configuration)
     }
     

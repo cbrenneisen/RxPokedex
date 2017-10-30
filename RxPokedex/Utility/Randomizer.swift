@@ -39,15 +39,18 @@ let explicitlyMoveSections = true
 let reloadSections = true
 
 struct Randomizer {
-    let sections: [NumberSection]
+    //let sections: [NumberSection]
+    let sections: [WildPokemonSection]
     
     let rng: PseudoRandomGenerator
     
-    let unusedItems: [IntItem]
+    //let unusedItems: [IntItem]
+    let unusedItems: [Pokemon]
     let unusedSections: [String]
     let dateCounter: Int
     
-    init(rng: PseudoRandomGenerator, sections: [NumberSection], unusedItems: [IntItem] = [], unusedSections: [String] = [], dateCounter: Int = 0) {
+    //init(rng: PseudoRandomGenerator, sections: [NumberSection], unusedItems: [IntItem] = [], unusedSections: [String] = [], dateCounter: Int = 0) {
+    init(rng: PseudoRandomGenerator, sections: [WildPokemonSection], unusedItems: [Pokemon] = [], unusedSections: [String] = [], dateCounter: Int = 0) {
         self.rng = rng
         self.sections = sections
         
@@ -56,16 +59,24 @@ struct Randomizer {
         self.dateCounter = dateCounter
     }
     
-    func countTotalItems(sections: [NumberSection]) -> Int {
+//    func countTotalItems(sections: [NumberSection]) -> Int {
+//        return sections.reduce(0) { p, s in
+//            return p + s.numbers.count
+//        }
+//    }
+    
+    func countTotalItems(sections: [WildPokemonSection]) -> Int {
         return sections.reduce(0) { p, s in
-            return p + s.numbers.count
+            return p + s.pokemon.count
         }
     }
+
     
     func randomize() -> Randomizer {
         
         var nextUnusedSections = [String]()
-        var nextUnusedItems = [IntItem]()
+        //var nextUnusedItems = [IntItem]()
+        var nextUnusedItems = [Pokemon]()
         
         var (nextRng, randomValue) = rng.get_random()
         
@@ -77,11 +88,14 @@ struct Randomizer {
         
         // update updates in current items if needed
         var sections = self.sections.map {
-            updateDates ? NumberSection(header: $0.header, numbers: $0.numbers.map { x in IntItem(number: x.number, date: date) }, updated: Date.distantPast)  : $0
+//            updateDates ? NumberSection(header: $0.header, numbers: $0.numbers.map { x in IntItem(number: x.number, date: date) }, updated: Date.distantPast)  : $0
+            updateDates ? WildPokemonSection(header: $0.header, pokemon: $0.pokemon.map { x in Pokemon(number: x.number, name: x.name, image: x.image, date: date) },
+                updated: Date.distantPast) : $0
         }
         
         let currentUnusedItems = self.unusedItems.map {
-            updateDates ? IntItem(number: $0.number, date: date) : $0
+            //updateDates ? IntItem(number: $0.number, date: date) : $0
+            updateDates ? Pokemon(number: $0.number, name: $0.name, image: $0.image, date: date) : $0
         }
         
         let sectionCount = sections.count
@@ -96,7 +110,9 @@ struct Randomizer {
             (nextRng, randomValue) = nextRng.get_random()
             let index = randomValue % (sections.count + 1)
             if insertSections {
-                sections.insert(NumberSection(header: section, numbers: [], updated: Date.distantPast), at: index)
+//                sections.insert(NumberSection(header: section, numbers: [], updated: Date.distantPast), at: index)
+                
+                sections.insert(WildPokemonSection(header: section, pokemon: [], updated: Date.distantPast ), at: index)
             }
             else {
                 nextUnusedSections.append(section)
@@ -109,7 +125,8 @@ struct Randomizer {
             
             let sectionIndex = randomValue % sections.count
             let section = sections[sectionIndex]
-            let itemCount = section.numbers.count
+            //let itemCount = section.numbers.count
+            let itemCount = section.pokemon.count
             
             // insert
             (nextRng, randomValue) = nextRng.get_random()
@@ -118,7 +135,8 @@ struct Randomizer {
                 let itemIndex = randomValue % (itemCount + 1)
                 
                 if insertItems {
-                    sections[sectionIndex].numbers.insert(unusedValue, at: itemIndex)
+                    //sections[sectionIndex].numbers.insert(unusedValue, at: itemIndex)
+                    sections[sectionIndex].pokemon.insert(unusedValue, at: itemIndex)
                 }
                 else {
                     nextUnusedItems.append(unusedValue)
@@ -127,16 +145,21 @@ struct Randomizer {
                 // update
             else {
                 if itemCount == 0 {
-                    sections[sectionIndex].numbers.insert(unusedValue, at: 0)
+                    //sections[sectionIndex].numbers.insert(unusedValue, at: 0)
+                    sections[sectionIndex].pokemon.insert(unusedValue, at: 0)
+
                     continue
                 }
                 
                 (nextRng, randomValue) = nextRng.get_random()
                 let itemIndex = itemCount
                 if reloadItems {
-                    nextUnusedItems.append(sections[sectionIndex].numbers.remove(at: itemIndex % itemCount))
-                    sections[sectionIndex].numbers.insert(unusedValue, at: itemIndex % itemCount)
-                    
+//                    nextUnusedItems.append(sections[sectionIndex].numbers.remove(at: itemIndex % itemCount))
+                    nextUnusedItems.append(sections[sectionIndex].pokemon.remove(at: itemIndex % itemCount))
+
+                    //sections[sectionIndex].numbers.insert(unusedValue, at: itemIndex % itemCount)
+                    sections[sectionIndex].pokemon.insert(unusedValue, at: itemIndex % itemCount)
+
                 }
                 else {
                     nextUnusedItems.append(unusedValue)
@@ -162,7 +185,9 @@ struct Randomizer {
             (nextRng, randomValue) = nextRng.get_random()
             let destinationSectionIndex = randomValue % sections.count
             
-            let sectionItemCount = sections[sourceSectionIndex].numbers.count
+//            let sectionItemCount = sections[sourceSectionIndex].numbers.count
+            let sectionItemCount = sections[sourceSectionIndex].pokemon.count
+
             
             if sectionItemCount == 0 {
                 continue
@@ -174,9 +199,14 @@ struct Randomizer {
             (nextRng, randomValue) = nextRng.get_random()
             
             if moveItems {
-                let item = sections[sourceSectionIndex].numbers.remove(at: sourceItemIndex)
-                let targetItemIndex = randomValue % (sections[destinationSectionIndex].numbers.count + 1)
-                sections[destinationSectionIndex].numbers.insert(item, at: targetItemIndex)
+//                let item = sections[sourceSectionIndex].numbers.remove(at: sourceItemIndex)
+                let item = sections[sourceSectionIndex].pokemon.remove(at: sourceItemIndex)
+                
+//                let targetItemIndex = randomValue % (sections[destinationSectionIndex].numbers.count + 1)
+                let targetItemIndex = randomValue % (sections[destinationSectionIndex].pokemon.count + 1)
+//                sections[destinationSectionIndex].numbers.insert(item, at: targetItemIndex)
+                sections[destinationSectionIndex].pokemon.insert(item, at: targetItemIndex)
+
             }
         }
         
@@ -192,7 +222,8 @@ struct Randomizer {
             (nextRng, randomValue) = nextRng.get_random()
             let sourceSectionIndex = randomValue % sections.count
             
-            let sectionItemCount = sections[sourceSectionIndex].numbers.count
+//            let sectionItemCount = sections[sourceSectionIndex].numbers.count
+            let sectionItemCount = sections[sourceSectionIndex].pokemon.count
             
             if sectionItemCount == 0 {
                 continue
@@ -202,7 +233,8 @@ struct Randomizer {
             let sourceItemIndex = randomValue % sectionItemCount
             
             if deleteItems {
-                nextUnusedItems.append(sections[sourceSectionIndex].numbers.remove(at: sourceItemIndex))
+//                nextUnusedItems.append(sections[sourceSectionIndex].numbers.remove(at: sourceItemIndex))
+                nextUnusedItems.append(sections[sourceSectionIndex].pokemon.remove(at: sourceItemIndex))
             }
         }
         
@@ -241,7 +273,8 @@ struct Randomizer {
             if deleteSections {
                 let section = sections.remove(at: sectionIndex)
                 
-                for item in section.numbers {
+                //for item in section.numbers {
+                for item in section.pokemon {
                     nextUnusedItems.append(item)
                 }
                 

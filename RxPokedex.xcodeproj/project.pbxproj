@@ -173,7 +173,6 @@
 				499C32591FA2BEF30071A110 /* Assets.xcassets */,
 				499C325B1FA2BEF30071A110 /* LaunchScreen.storyboard */,
 				499C325E1FA2BEF30071A110 /* Info.plist */,
-				499C32821FA395200071A110 /* WildPokemonCell.swift */,
 			);
 			path = RxPokedex;
 			sourceTree = "<group>";
@@ -209,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				49B8FDE11FA4081E008C283B /* WildPokemonSectionView.swift */,
+				499C32821FA395200071A110 /* WildPokemonCell.swift */,
 				499C32541FA2BEF30071A110 /* WildPokemonViewController.swift */,
 				49B8FDE61FA4E6A8008C283B /* WildPokemonPresenter.swift */,
 				495407F71FA652BF00F67BF4 /* WildPokemonSection.swift */,

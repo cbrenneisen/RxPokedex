@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import SDWebImage
 
 class WildPokemonCell: UICollectionViewCell {
     
     @IBOutlet weak var pokemonImageView: UIImageView!
-    @IBOutlet weak var value: UILabel!
     
     static let identifier = "WildPokemonCell"
     
@@ -21,20 +21,14 @@ class WildPokemonCell: UICollectionViewCell {
         
         pokemonImageView.contentMode = .scaleAspectFill
         pokemonImageView.clipsToBounds = true
-        
-        pokemonImageView.layer.borderWidth = 1.0
-        pokemonImageView.layer.borderColor = UIColor.white.cgColor
-        pokemonImageView.backgroundColor = UIColor.red
-
+        pokemonImageView.backgroundColor = UIColor.clear
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        //update circle when rotating the device - not the best practice here, but it works for now:
-        pokemonImageView.layer.cornerRadius = self.pokemonImageView.layer.frame.size.width/2
+    func configureWith(pokemon: Pokemon){
+        pokemonImageView.sd_setImage(with: URL(string: pokemon.image),
+                                     placeholderImage: UIImage(named: "question-mark"))
     }
-
+    
     
     
 }

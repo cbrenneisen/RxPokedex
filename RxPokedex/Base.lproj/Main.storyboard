@@ -47,24 +47,15 @@
                                                         <constraint firstAttribute="width" secondItem="Pyv-oG-19H" secondAttribute="height" multiplier="1:1" id="598-XC-Lcb"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="{1}" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQJ-VU-1CP">
-                                                    <rect key="frame" x="28" y="31" width="40" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="Pyv-oG-19H" firstAttribute="leading" secondItem="4aw-o2-wsh" secondAttribute="leading" constant="13" id="Lqr-Qk-VM2"/>
                                             <constraint firstItem="Pyv-oG-19H" firstAttribute="centerY" secondItem="4aw-o2-wsh" secondAttribute="centerY" id="NZy-BV-FUp"/>
-                                            <constraint firstItem="KQJ-VU-1CP" firstAttribute="centerX" secondItem="4aw-o2-wsh" secondAttribute="centerX" id="Vhr-46-hng"/>
-                                            <constraint firstItem="KQJ-VU-1CP" firstAttribute="centerY" secondItem="4aw-o2-wsh" secondAttribute="centerY" id="dyB-Wy-ish"/>
                                             <constraint firstItem="Pyv-oG-19H" firstAttribute="centerX" secondItem="4aw-o2-wsh" secondAttribute="centerX" id="qk9-rg-ycM"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="pokemonImageView" destination="Pyv-oG-19H" id="9ut-Fi-iFe"/>
-                                            <outlet property="value" destination="KQJ-VU-1CP" id="6W1-8k-3fw"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

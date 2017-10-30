@@ -12,14 +12,19 @@ import RxDataSources
 
 protocol WildPokemonPresenterInterface: class {
     
-    var sections: Observable<[NumberSection]> { get }
-    var dataSource: RxCollectionViewSectionedAnimatedDataSource<NumberSection> { get }
+//    var sections: Observable<[NumberSection]> { get }
+    var sections: Observable<[WildPokemonSection]> { get }
+//    var dataSource: RxCollectionViewSectionedAnimatedDataSource<NumberSection> { get }
+    var dataSource: RxCollectionViewSectionedAnimatedDataSource<WildPokemonSection> { get }
+
 }
 
 final class WildPokemonPresenter: WildPokemonPresenterInterface {
     
-    let sections: Observable<[NumberSection]>
-    let dataSource: RxCollectionViewSectionedAnimatedDataSource<NumberSection>
+//    let sections: Observable<[NumberSection]>
+    let sections: Observable<[WildPokemonSection]>
+//    let dataSource: RxCollectionViewSectionedAnimatedDataSource<NumberSection>
+    let dataSource: RxCollectionViewSectionedAnimatedDataSource<WildPokemonSection>
     
     convenience init() {
         self.init(initialData: nil)
@@ -34,8 +39,11 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
             }
         }
         
+        let input = initialData ?? []
         let initialRandomizedSections = Randomizer(rng: PseudoRandomGenerator(4, 3),
-                                                   sections: WildPokemonPresenter.initialValue())
+                                                   sections: WildPokemonPresenter.process(inputPokemon: input))
+            
+            //WildPokemonPresenter.initialValue())
         
         let ticks = Observable<Int>
                     .interval(1, scheduler: MainScheduler.instance)
@@ -54,19 +62,23 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
             configureSupplementaryView: WildPokemonPresenter.configureSection())
     }
     
-    private static func configureCell() -> CollectionViewSectionedDataSource<NumberSection>.ConfigureCell {
-        return { (_, collectionView, indexPath, number) in
+//    private static func configureCell() -> CollectionViewSectionedDataSource<NumberSection>.ConfigureCell {
+    private static func configureCell() -> CollectionViewSectionedDataSource<WildPokemonSection>.ConfigureCell {
+        return { (_, collectionView, indexPath, pokemon) in
     
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WildPokemonCell.identifier, for: indexPath) as! WildPokemonCell
-                cell.value!.text = "\(number)"
+            
+                //cell.value!.text = "?" //"\(number)"            
+                cell.configureWith(pokemon: pokemon as Pokemon)
                 return cell
         }
     }
     
-    private static func configureSection() -> CollectionViewSectionedDataSource<NumberSection>.ConfigureSupplementaryView {
+//    private static func configureSection() -> CollectionViewSectionedDataSource<NumberSection>.ConfigureSupplementaryView {
+    private static func configureSection() -> CollectionViewSectionedDataSource<WildPokemonSection>.ConfigureSupplementaryView {
         return { (ds ,cv, kind, ip) in
             let section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WildPokemonSectionView.identifier, for: ip) as! WildPokemonSectionView
-            section.value!.text = "\(ds[ip.section].header)"
+            section.value!.text = "?" // "\(ds[ip.section].header)"
             return section
         }
     }
@@ -81,7 +93,7 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
         }
     }
     
-    private func process(inputPokemon: [Pokemon]) -> [WildPokemonSection] {
+    private static func process(inputPokemon: [Pokemon]) -> [WildPokemonSection] {
         //Apply view logic to a regular array of pokemon - divide into sections
         let nSections = 2
         let nItems = 10
