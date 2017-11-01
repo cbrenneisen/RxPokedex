@@ -27,18 +27,22 @@ final class WildPokemonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupUI()
         presenter = WildPokemonPresenter(initialData: injection)
-        presenter
-            .sections
-            .bind(to: pokemonCollectionView.rx.items(
-                    dataSource: presenter.dataSource))
-            .disposed(by: disposeBag)
+        setupUI()
+        setupBindings()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
+    }
+    
+    private func setupBindings(){
+        presenter
+            .sections
+            .bind(to: pokemonCollectionView.rx.items(
+                dataSource: presenter.dataSource))
+            .disposed(by: disposeBag)
     }
     
     private func setupUI(){
@@ -52,11 +56,5 @@ final class WildPokemonViewController: UIViewController {
         nav.navigationBar.isTranslucent = false
         nav.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
     }
-
 }
-
-func `$`(_ numbers: [Int]) -> [IntItem] {
-    return numbers.map { IntItem(number: $0, date: Date()) }
-}
-
 

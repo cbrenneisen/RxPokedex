@@ -49,7 +49,7 @@ final class RemotePokemonManager: RemotePokemonService {
         
     _ = manager.rx.data(.get, API.getPokemonURL(offset: offset))
             .subscribeOn(concurrentScheduler)
-            .map({ try JSONDecoder().decode(JSONPokemonResult.self, from: $0).results})
+            .map({ try JSONDecoder().decode(JSONPokemonResult.self, from: $0).results })
             .map({ pokemon in pokemon.map({ $0.url })})
 //            .map({ urls in
 //                Observable

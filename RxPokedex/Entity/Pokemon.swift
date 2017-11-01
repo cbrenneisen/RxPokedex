@@ -14,13 +14,12 @@ struct Pokemon {
     let name: String
     let image: String
     let date: Date
-    
 //    init(realmObj: RealmPokemon){
 //        self.uuid = realmObj.name
 //        self.name = realmObj.name
 //        self.image = realmObj.name
 //        self.date = realmObj.date
-//    }
+//   }
     
     init(number: Int, name: String, image: String, date: Date){
         self.number = number
