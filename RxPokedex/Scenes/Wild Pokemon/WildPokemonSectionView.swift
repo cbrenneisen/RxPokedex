@@ -9,10 +9,19 @@
 import UIKit
 
 class WildPokemonSectionView: UICollectionReusableView {
-    
-    @IBOutlet weak var value: UILabel!
-    
+        
     static let identifier = "WildPokemonSection"
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        //background
+        if let image = UIImage(named: "tree") {
+            
+            backgroundColor = UIColor(patternImage: image)
+        }
+
+        
+    }
     
 }

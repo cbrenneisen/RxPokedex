@@ -18,18 +18,21 @@ protocol WildPokemonPresenterInterface: class {
 
 final class WildPokemonPresenter: WildPokemonPresenterInterface {
     
-    let sections: Observable<[WildPokemonSection]>
+    //MARK: Protocol
     let dataSource: RxCollectionViewSectionedAnimatedDataSource<WildPokemonSection>
+    var sections: Observable<[WildPokemonSection]> {
+        return shuffler.map({ [weak self] _ in
+            guard let weakSelf = self else { return [] }
+            weakSelf.randomPokemonSections = weakSelf.randomPokemonSections.randomize()
+            return weakSelf.randomPokemonSections.sections
+        })
+    }
     
-    var wildPokemonSections: [WildPokemonSection] = []
-    var interactor: WildPokemonInteractor = WildPokemonInteractor()
-    
+    //MARK: Internals
+    let interactor: WildPokemonInteractor = WildPokemonInteractor()
     private var randomPokemonSections: Randomizer
+    private let shuffler = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
     private let disposeBag = DisposeBag()
-    private let refreshTime: RxTimeInterval = 1 //measured in seconds
-    private let reloadTime: RxTimeInterval = 10 //measured in seconds
-
-    let test = ReplaySubject<Randomizer>.create(bufferSize: 1)
     
     convenience init() {
         self.init(initialData: nil)
@@ -38,24 +41,9 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
     init(initialData: [Pokemon]?){
         
         let input = initialData ?? []
-        self.randomPokemonSections = Randomizer(rng: PseudoRandomGenerator(4, 3),
-                                                   sections: WildPokemonPresenter.process(inputPokemon: input))
-        
-        //refresh every so often
-        let refresh = Observable<Int>
-                    .interval(refreshTime, scheduler: MainScheduler.instance)
-                    .map { _ in () }
-        
-//        Observable
-//            .combineLatest(refresh, test)
-//            .map({ _, q in q.randomize()})
-
-        self.sections =
-            Observable.of(refresh)
-            .merge()
-            .scan(randomPokemonSections) { a, _ in return a.randomize()}
-            .map { $0.sections }
-            .share(replay: 1)
+        self.randomPokemonSections = Randomizer(
+            rng: PseudoRandomGenerator(4, 3),
+            sections: WildPokemonPresenter.process(inputPokemon: input))
         
         self.dataSource = RxCollectionViewSectionedAnimatedDataSource(
             configureCell: WildPokemonPresenter.configureCell(),
@@ -69,13 +57,7 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
     
     private func setupBindings(){
 
-//        Observable<Int>
-//            .interval(reloadTime, scheduler: MainScheduler.instance)
-//            .map { _ in () }
-//            .subscribe(onNext: { [weak self] _ in
-//                self?.interactor.requestPokemon()
-//            }).disposed(by: disposeBag)
-        
+        //listen for changes to the current batch of pokemon
         interactor
             .wildPokemon
             .observeOn(MainScheduler.instance)
@@ -100,9 +82,7 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
     private static func configureSection() -> CollectionViewSectionedDataSource<WildPokemonSection>.ConfigureSupplementaryView {
         return { (ds, collectionView, kind, ip) in
             let section = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                withReuseIdentifier: WildPokemonSectionView.identifier,
-                                                                for: ip) as! WildPokemonSectionView
-            section.value!.text = "?" // "\(ds[ip.section].header)"
+                                                                withReuseIdentifier: WildPokemonSectionView.identifier,                                                                for: ip) as! WildPokemonSectionView
             return section
         }
     }

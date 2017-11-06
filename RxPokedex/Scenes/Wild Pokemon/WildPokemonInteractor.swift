@@ -22,8 +22,19 @@ final class WildPokemonInteractor: WildPokemonInteractorInterface,  RemotePokemo
         return remotePokemonService.gatheredPokemon
     }
     
+    private let reloader = Observable<Int>.interval(15, scheduler: MainScheduler.instance)
+    private let disposeBag = DisposeBag()
+    
     init(){
-        
+        setupObservers()
+    }
+    
+    func setupObservers(){
+        Observable.of(reloader.map { _ in () })
+            .merge()
+            .subscribe(onNext: { [weak self] in
+                self?.remotePokemonService.getInitialPokemon()
+            }).disposed(by: disposeBag)
     }
     
     func requestPokemon() {
@@ -33,5 +44,4 @@ final class WildPokemonInteractor: WildPokemonInteractorInterface,  RemotePokemo
     func capture(pokemon: Pokemon) {
         //TODO
     }
-    
 }

@@ -47,14 +47,20 @@ final class WildPokemonViewController: UIViewController {
     
     private func setupUI(){
         
+        //background
+        if let image = UIImage(named: "grass") {
+            view.backgroundColor = UIColor(patternImage: image)
+        }
+
         navigationItem.hidesBackButton = true
         guard let nav = navigationController else { return }
-        
         nav.navigationBar.isHidden = false
         nav.navigationBar.tintColor = UIColor.white
         nav.navigationBar.barTintColor = UIColor.navColor
         nav.navigationBar.isTranslucent = false
         nav.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        
+
     }
 }
 

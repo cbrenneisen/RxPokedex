@@ -62,27 +62,11 @@
                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="WildPokemonSection" reuseIdentifier="WildPokemonSection" id="F3i-E2-Qn0" customClass="WildPokemonSectionView" customModule="RxPokedex" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="83" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2e-i6-N36">
-                                            <rect key="frame" x="8" y="15" width="398" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                     <color key="backgroundColor" red="0.63137254899999995" green="0.1764705882" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstItem="X2e-i6-N36" firstAttribute="leading" secondItem="F3i-E2-Qn0" secondAttribute="leading" constant="8" id="5Sz-zh-jZy"/>
-                                        <constraint firstItem="X2e-i6-N36" firstAttribute="top" secondItem="F3i-E2-Qn0" secondAttribute="top" constant="15" id="94w-ag-b7A"/>
-                                        <constraint firstAttribute="trailing" secondItem="X2e-i6-N36" secondAttribute="trailing" constant="8" id="Zon-mJ-tG5"/>
-                                    </constraints>
-                                    <connections>
-                                        <outlet property="value" destination="X2e-i6-N36" id="Seg-h9-ajR"/>
-                                    </connections>
                                 </collectionReusableView>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="0.066666666666666666" green="0.066666666666666666" blue="0.066666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="mZU-hb-g4J">
@@ -101,7 +85,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="788.40579710144937" y="132.88043478260872"/>
+            <point key="canvasLocation" x="897" y="133"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JbE-Ie-0A3">
