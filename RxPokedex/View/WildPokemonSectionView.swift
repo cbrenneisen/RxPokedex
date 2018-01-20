@@ -17,11 +17,8 @@ class WildPokemonSectionView: UICollectionReusableView {
         
         //background
         if let image = UIImage(named: "tree") {
-            
             backgroundColor = UIColor(patternImage: image)
         }
-
-        
     }
     
 }

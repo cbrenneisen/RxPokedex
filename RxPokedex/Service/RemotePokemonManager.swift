@@ -10,22 +10,7 @@ import Foundation
 import RxSwift
 import Alamofire
 import RxAlamofire
-
-fileprivate struct API {
-    
-    private static let limit = 20
-    private static let baseURL = "https://pokeapi.co/api/v2/pokemon/"
- 
-    static func getPokemon(offset: Int) -> URL? {
-        
-        let urlString = baseURL + "?limit=\(limit)&offset=\(offset)"
-        return URL(string: urlString)
-    }
-    
-    static func getPokemonURL(offset: Int) -> String {
-        return baseURL + "?limit=\(limit)&offset=\(offset)"
-    }
-}
+import RxSwiftExt
 
 final class RemotePokemonManager: RemotePokemonService {
     
@@ -39,17 +24,17 @@ final class RemotePokemonManager: RemotePokemonService {
         return Alamofire.SessionManager(configuration: configuration)
     }
     
-    private let limit = 20
-    private var offset = 0
+    private var page = 0
     private let disposeBag = DisposeBag()
     
     let gatheredPokemon = PublishSubject<[Pokemon]>()
     
     func getInitialPokemon(){
         
-    _ = manager.rx.data(.get, API.getPokemonURL(offset: offset))
+    _ = manager.rx.data(.get, API.AllPokemon.with(page: 0))
             .subscribeOn(concurrentScheduler)
-            .map({ try JSONDecoder().decode(JSONPokemonResult.self, from: $0).results })
+            .map({ Parse.Pokemon.list(from: $0) })
+            .unwrap()
             .map({ pokemon in pokemon.map({ $0.url })})
 //            .map({ urls in
 //                Observable
@@ -62,7 +47,7 @@ final class RemotePokemonManager: RemotePokemonService {
 //                .map({ jsonData in jsonData.flatMap({( Pokemon(json: $0))}) })
 //            })
             .subscribe(onNext: { [unowned self] data in
-                self.offset += self.limit
+                self.page += 1
                 self.getPokemonDetail(urls: data)
             })
     }

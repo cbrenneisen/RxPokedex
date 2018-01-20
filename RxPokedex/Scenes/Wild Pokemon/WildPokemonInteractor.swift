@@ -16,7 +16,7 @@ protocol WildPokemonInteractorInterface {
     func capture(pokemon: Pokemon)
 }
 
-final class WildPokemonInteractor: WildPokemonInteractorInterface,  RemotePokemonServiceInjected {
+final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemonServiceInjected {
 
     var wildPokemon: Observable<[Pokemon]> {
         return remotePokemonService.gatheredPokemon
@@ -25,7 +25,7 @@ final class WildPokemonInteractor: WildPokemonInteractorInterface,  RemotePokemo
     private let reloader = Observable<Int>.interval(15, scheduler: MainScheduler.instance)
     private let disposeBag = DisposeBag()
     
-    init(){
+    init(initialData: [Pokemon]){
         setupObservers()
     }
     

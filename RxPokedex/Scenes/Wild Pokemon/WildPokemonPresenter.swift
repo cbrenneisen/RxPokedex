@@ -13,13 +13,12 @@ import RxDataSources
 protocol WildPokemonPresenterInterface: class {
     
     var sections: Observable<[WildPokemonSection]> { get }
-    var dataSource: RxCollectionViewSectionedAnimatedDataSource<WildPokemonSection> { get }
+    var cvDataSource: RxCollectionViewSectionedAnimatedDataSource<WildPokemonSection> { get }
 }
 
 final class WildPokemonPresenter: WildPokemonPresenterInterface {
     
     //MARK: Protocol
-    let dataSource: RxCollectionViewSectionedAnimatedDataSource<WildPokemonSection>
     var sections: Observable<[WildPokemonSection]> {
         return shuffler.map({ [weak self] _ in
             guard let weakSelf = self else { return [] }
@@ -28,29 +27,34 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
         })
     }
     
+    //MARK: Architecture
+    private let interactor: WildPokemonInteractor
+    private let dataSource: WildPokemonDataSource
+    let cvDataSource: RxCollectionViewSectionedAnimatedDataSource<WildPokemonSection>
+    
     //MARK: Internals
-    let interactor: WildPokemonInteractor = WildPokemonInteractor()
     private var randomPokemonSections: Randomizer
     private let shuffler = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
     private let disposeBag = DisposeBag()
     
     convenience init() {
-        self.init(initialData: nil)
+        self.init(initialData: [])
     }
     
-    init(initialData: [Pokemon]?){
+    init(initialData: [Pokemon]){
         
-        let input = initialData ?? []
         self.randomPokemonSections = Randomizer(
             rng: PseudoRandomGenerator(4, 3),
-            sections: WildPokemonPresenter.process(inputPokemon: input))
-        
-        self.dataSource = RxCollectionViewSectionedAnimatedDataSource(
-            configureCell: WildPokemonPresenter.configureCell(),
-            configureSupplementaryView: WildPokemonPresenter.configureSection())
+            sections: WildPokemonPresenter.process(inputPokemon: initialData))
+
+        self.interactor = WildPokemonInteractor(initialData: initialData)
+        self.dataSource = WildPokemonDataSource()
+        self.cvDataSource = RxCollectionViewSectionedAnimatedDataSource(
+            configureCell: dataSource.configureCell(),
+            configureSupplementaryView: dataSource.configureSection())
         
         setupBindings()
-        if input.isEmpty{
+        if initialData.isEmpty{
             self.interactor.requestPokemon()
         }
     }
@@ -61,32 +65,13 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
         interactor
             .wildPokemon
             .observeOn(MainScheduler.instance)
+            .map({ WildPokemonPresenter.process(inputPokemon: $0) })
+            .map({ Randomizer(rng: PseudoRandomGenerator(4, 3), sections: $0) })
             .subscribe(onNext: { [weak self] gatheredPokemon in
-                self?.randomPokemonSections = Randomizer(
-                    rng: PseudoRandomGenerator(4, 3),
-                    sections: WildPokemonPresenter.process(inputPokemon: gatheredPokemon))
+                self?.randomPokemonSections = gatheredPokemon
             }).disposed(by: disposeBag)
     }
 
-    private static func configureCell() -> CollectionViewSectionedDataSource<WildPokemonSection>.ConfigureCell {
-        return { (_, collectionView, indexPath, pokemon) in
-    
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WildPokemonCell.identifier,
-                                                      for: indexPath) as! WildPokemonCell
-            
-                cell.configureWith(pokemon: pokemon as Pokemon)
-                return cell
-        }
-    }
-    
-    private static func configureSection() -> CollectionViewSectionedDataSource<WildPokemonSection>.ConfigureSupplementaryView {
-        return { (ds, collectionView, kind, ip) in
-            let section = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                withReuseIdentifier: WildPokemonSectionView.identifier,                                                                for: ip) as! WildPokemonSectionView
-            return section
-        }
-    }
-    
     private static func process(inputPokemon: [Pokemon]) -> [WildPokemonSection] {
         //Apply view logic to a regular array of pokemon - divide into sections
         let nSections = 2

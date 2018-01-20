@@ -10,7 +10,5 @@ import Foundation
 
 struct InjectionMap {
     
-    static var pokemonService: RemotePokemonService = RemotePokemonManager()
-
-    
+    static var pokemonService: RemotePokemonService = RemotePokemonManager()    
 }

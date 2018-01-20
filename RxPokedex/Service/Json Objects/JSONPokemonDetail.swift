@@ -8,15 +8,14 @@
 
 import Foundation
 
+/*
+Represents a detailed pokemon object from the server
+forms: an array containing the different pokemon instances (normal, shiny, etc)
+sprites: an array containing image urls for all the different instances
+ */
 
-struct JSONPokemonResult: Decodable {
-    let results: [JSONPokemon]
-}
-struct JSONPokemon: Decodable {
-    let name: String
-    let url: String
-}
 struct JSONPokemonDetail: Decodable {
+
     let forms: [JSONPokemon]
     let sprites: [String: String?]
 }

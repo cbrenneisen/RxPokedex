@@ -14,6 +14,8 @@ target 'RxPokedex' do
     pod 'RxAlamofire'
     pod 'RealmSwift'
     pod 'RxRealm'
+    pod 'RxSwiftExt'    
+    pod 'Kingfisher' 
     pod 'SDWebImage'
 
   target 'RxPokedexTests' do

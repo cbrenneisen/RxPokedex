@@ -9,7 +9,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import Differentiator
 import RxDataSources
 
 final class WildPokemonViewController: UIViewController {
@@ -27,21 +26,20 @@ final class WildPokemonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter = WildPokemonPresenter(initialData: injection)
+        presenter = WildPokemonPresenter(initialData: injection ?? [])
         setupUI()
         setupBindings()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
     }
     
     private func setupBindings(){
         presenter
             .sections
             .bind(to: pokemonCollectionView.rx.items(
-                dataSource: presenter.dataSource))
+                dataSource: presenter.cvDataSource))
             .disposed(by: disposeBag)
     }
     
@@ -59,8 +57,6 @@ final class WildPokemonViewController: UIViewController {
         nav.navigationBar.barTintColor = UIColor.navColor
         nav.navigationBar.isTranslucent = false
         nav.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        
-
     }
 }
 
