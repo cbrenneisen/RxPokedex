@@ -10,31 +10,28 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class LoadingViewController: UIViewController {
+final class LoadingViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var viewModel: LoadingViewModel!
-    let disposeBag = DisposeBag()
+    let viewModel = LoadingViewModel()
+    var disposeBag = DisposeBag()
 
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = LoadingViewModel()
+
         setupUI()
         setupBindings()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewModel.wake()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        //stop observing remote changes
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        viewModel.sleep()
+        //once we segue away, there is no use doing anything in this screen anymore
+        finish()
     }
     
+    //MARK: - Setup
     func setupUI(){
         activityIndicator.hidesWhenStopped = true
         navigationController?.navigationBar.isHidden = true
@@ -44,25 +41,27 @@ class LoadingViewController: UIViewController {
         
         viewModel
             .loading
-            .asDriver(onErrorJustReturn: false)
-            .asObservable()
-            .bind(to: activityIndicator.rx.isAnimating)
+            .asDriver(onErrorJustReturn: true)
+            .drive(activityIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
         
         viewModel
             .gatheredPokemon
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] pokemon in
+            .asDriver(onErrorJustReturn: [])
+            .drive(onNext: { [unowned self] pokemon in
                 self.continueWith(pokemon: pokemon)
             }).disposed(by: disposeBag)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private func finish(){
+        disposeBag = DisposeBag()
+        viewModel.sleep()
     }
 
-    func continueWith(pokemon: [Pokemon]){
+    //MARK: - Navigation
+    
+    //Once we receive some pokemon, proceed to the next screen
+    private func continueWith(pokemon: [Pokemon]){
         performSegue(withIdentifier: "WildPokemonSegue", sender: pokemon)
     }
     
@@ -74,5 +73,4 @@ class LoadingViewController: UIViewController {
         }
         vc.injection = pokemon
     }
-
 }

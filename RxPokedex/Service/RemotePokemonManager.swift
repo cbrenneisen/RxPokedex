@@ -11,12 +11,10 @@ import RxSwift
 import Alamofire
 import RxAlamofire
 import RxSwiftExt
+import RxCocoa
 
-final class RemotePokemonManager: RemotePokemonService {
-    
-    private let concurrentScheduler = ConcurrentDispatchQueueScheduler(qos: .userInitiated)
-    
-    private var manager: SessionManager {
+fileprivate struct RxSession {
+    static var manager: SessionManager {
         let configuration = URLSessionConfiguration.default
         let cacheLength = 24 * 60 * 60
         configuration.httpAdditionalHeaders =  ["Cache-Control" : "public, s-maxage=\(cacheLength)"]
@@ -24,48 +22,30 @@ final class RemotePokemonManager: RemotePokemonService {
         return Alamofire.SessionManager(configuration: configuration)
     }
     
-    private var page = 0
+    static var scheduler: ConcurrentDispatchQueueScheduler {
+        return ConcurrentDispatchQueueScheduler(qos: .userInitiated)
+    }
+}
+
+final class RemotePokemonManager: RemotePokemonService {
+    
     private let disposeBag = DisposeBag()
     
-    let gatheredPokemon = PublishSubject<[Pokemon]>()
-    
-    func getInitialPokemon(){
-        
-    _ = manager.rx.data(.get, API.AllPokemon.with(page: 0))
-            .subscribeOn(concurrentScheduler)
-            .map({ Parse.Pokemon.list(from: $0) })
-            .unwrap()
-            .map({ pokemon in pokemon.map({ $0.url })})
-//            .map({ urls in
-//                Observable
-//                    .zip(urls.map({ url in
-//                        data(.get, url)
-//                            .observeOn(concurrentScheduler)
-//                    })
-//                )
-//                .map({ data in try data.map({try JSONDecoder().decode(JSONPokemonDetail.self, from: $0)}) })
-//                .map({ jsonData in jsonData.flatMap({( Pokemon(json: $0))}) })
-//            })
-            .subscribe(onNext: { [unowned self] data in
-                self.page += 1
-                self.getPokemonDetail(urls: data)
-            })
+    var wildPokemon: Observable<[Pokemon]> {
+        return gatheredPokemon
+                .map({ Observable.zip($0.map({ RxSession.manager.rx.data(.get, $0.url)})) })
+                .flatMap({ $0 })
+                .map({ $0.flatMap({ Parse.Pokemon.Detail.single(from: $0) })})
+                .map({ $0.flatMap({( Pokemon(json: $0))}) })
     }
     
-    private func getPokemonDetail(urls: [String]){
-        
-        Observable
-            .zip(urls.map({
-                url in manager.rx.data(.get, url).subscribeOn(concurrentScheduler)
-            }))
-            .map({ data in
-                try data.map({ try JSONDecoder().decode(JSONPokemonDetail.self, from: $0) })
-            })
-            .map({ jsonData in
-                jsonData.flatMap({( Pokemon(json: $0))})
-            })
-            .subscribe(onNext: { [unowned self] data in
-                self.gatheredPokemon.onNext(data)
-            }).disposed(by: disposeBag)
+    private var gatheredPokemon = PublishSubject<[JSONPokemon]>()
+    
+    func requestPokemon(page: Int){
+        _ = RxSession.manager.rx.data(.get, API.AllPokemon.with(page: page))
+            .subscribeOn(RxSession.scheduler)
+            .map({ Parse.Pokemon.Summary.list(from: $0) })
+            .unwrap()
+            .bind(to: gatheredPokemon)
     }
 }

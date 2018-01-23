@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 protocol RemotePokemonServiceInjected { }
 
@@ -18,8 +19,13 @@ extension RemotePokemonServiceInjected {
 
 protocol RemotePokemonService {
     
-    var gatheredPokemon: PublishSubject<[Pokemon]> { get }
-    func getInitialPokemon()
+    var wildPokemon: Observable<[Pokemon]> { get }
+    func requestPokemon(page: Int)
+}
+
+extension RemotePokemonService {
     
-    
+    func requestPokemon(page: Int = 0){
+        requestPokemon(page: page)
+    }
 }

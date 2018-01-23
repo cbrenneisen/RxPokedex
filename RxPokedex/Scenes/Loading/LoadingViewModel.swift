@@ -18,12 +18,12 @@ final class LoadingViewModel: RemotePokemonServiceInjected {
         
     init(){
         setupBindings()
-        remotePokemonService.getInitialPokemon()
+        remotePokemonService.requestPokemon()
     }
     
     func setupBindings(){
         remotePokemonService
-            .gatheredPokemon
+            .wildPokemon
             .subscribe(onNext: { [unowned self] pokemon in
                 self.loading.onNext(false)
                 self.gatheredPokemon.onNext(pokemon)
@@ -39,5 +39,4 @@ final class LoadingViewModel: RemotePokemonServiceInjected {
         disposeBag = DisposeBag()
         setupBindings()
     }
-    
 }

@@ -8,37 +8,47 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 protocol WildPokemonInteractorInterface {
     
-    var wildPokemon: Observable<[Pokemon]> { get }
-    func requestPokemon()
+    var currentPokemon: BehaviorSubject<[Pokemon]> { get }
     func capture(pokemon: Pokemon)
 }
 
 final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemonServiceInjected {
 
-    var wildPokemon: Observable<[Pokemon]> {
-        return remotePokemonService.gatheredPokemon
-    }
-    
+    var currentPokemon: BehaviorSubject<[Pokemon]>
+
+    private var page: Int
     private let reloader = Observable<Int>.interval(15, scheduler: MainScheduler.instance)
     private let disposeBag = DisposeBag()
     
     init(initialData: [Pokemon]){
+        self.page = initialData.isEmpty ? 0 : 1
+        self.currentPokemon = BehaviorSubject<[Pokemon]>(value: initialData)
         setupObservers()
     }
     
-    func setupObservers(){
+    private func setupObservers(){
+        
+        remotePokemonService
+            .wildPokemon
+            .bind(to: currentPokemon)
+            .disposed(by: disposeBag)
+        
         Observable.of(reloader.map { _ in () })
             .merge()
             .subscribe(onNext: { [weak self] in
-                self?.remotePokemonService.getInitialPokemon()
+                self?.refreshPokemon()
             }).disposed(by: disposeBag)
     }
-    
-    func requestPokemon() {
-        remotePokemonService.getInitialPokemon()
+        
+    private func refreshPokemon() {
+        //allPokemon
+        print("requesting: \(page)")
+        remotePokemonService.requestPokemon(page: page)
+        page +=  1
     }
     
     func capture(pokemon: Pokemon) {

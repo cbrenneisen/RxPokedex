@@ -36,12 +36,8 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
     private var randomPokemonSections: Randomizer
     private let shuffler = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
     private let disposeBag = DisposeBag()
-    
-    convenience init() {
-        self.init(initialData: [])
-    }
-    
-    init(initialData: [Pokemon]){
+        
+    init(initialData: [Pokemon] = []){
         
         self.randomPokemonSections = Randomizer(
             rng: PseudoRandomGenerator(4, 3),
@@ -54,16 +50,13 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
             configureSupplementaryView: dataSource.configureSection())
         
         setupBindings()
-        if initialData.isEmpty{
-            self.interactor.requestPokemon()
-        }
     }
     
     private func setupBindings(){
 
         //listen for changes to the current batch of pokemon
         interactor
-            .wildPokemon
+            .currentPokemon
             .observeOn(MainScheduler.instance)
             .map({ WildPokemonPresenter.process(inputPokemon: $0) })
             .map({ Randomizer(rng: PseudoRandomGenerator(4, 3), sections: $0) })
