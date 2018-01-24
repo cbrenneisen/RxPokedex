@@ -12,10 +12,10 @@ import RxDataSources
 struct Pokemon {
     let number: Int
     let name: String
-    let image: String
+    let image: URL
     let date: Date
 
-    init(number: Int, name: String, image: String, date: Date){
+    init(number: Int, name: String, image: URL, date: Date){
         self.number = number
         self.name = name
         self.image = image
@@ -25,14 +25,11 @@ struct Pokemon {
     init?(json: JSONPokemonDetail){
         
         guard let name = json.forms.first?.name,
-            let image = json.sprites.values.flatMap({$0}).first else {
+            let image = json.sprites.values.flatMap({$0}).first,
+            let imageUrl = URL(string: image) else {
             return nil
         }
-        
-        self.name = name
-        self.image = image
-        self.date = Date()
-        self.number = Int(arc4random_uniform(UInt32.max))
+        self.init(number: Int.randomID, name: name, image: imageUrl, date: Date())
     }
 }
 

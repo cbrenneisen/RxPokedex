@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import SDWebImage
+import Kingfisher
 
-class WildPokemonCell: UICollectionViewCell {
+final class WildPokemonCell: UICollectionViewCell {
     
     @IBOutlet weak var pokemonImageView: UIImageView!
     
@@ -21,14 +21,10 @@ class WildPokemonCell: UICollectionViewCell {
         
         pokemonImageView.contentMode = .scaleAspectFill
         pokemonImageView.clipsToBounds = true
-        pokemonImageView.backgroundColor = UIColor.clear
+        pokemonImageView.backgroundColor = UIColor.clear        
     }
     
     func configureWith(pokemon: Pokemon){
-        pokemonImageView.sd_setImage(with: URL(string: pokemon.image),
-                                     placeholderImage: UIImage(named: "question-mark"))
+        pokemonImageView.kf.setImage(with: pokemon.image, placeholder: UIImage.placeholder)
     }
-    
-    
-    
 }

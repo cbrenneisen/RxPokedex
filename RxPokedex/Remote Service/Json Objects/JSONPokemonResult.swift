@@ -8,10 +8,11 @@
 
 import Foundation
 
-/*
-Represents a wrapper around an array of JSON Pokemon
-i.e, requesting a batch of pokemon from the server
-*/
+/**
+ Represents a wrapper around an array of JSON Pokemon
+
+ - property results: an array of pokemon objects
+ */
 struct JSONPokemonResult: Decodable {
 
     let results: [JSONPokemon]

@@ -39,6 +39,8 @@ final class RemotePokemonManager: RemotePokemonService {
         - parameter page: The offset for which to start searching for Pokemon
      */
     func requestPokemon(page: Int){
+        // - fetch the data for the corresponding offset from the server
+        //
         _ = RxSession.manager.rx.data(.get, API.AllPokemon.with(page: page))
             .subscribeOn(RxSession.scheduler)
             .map({ Parse.Pokemon.Summary.list(from: $0) })
@@ -51,13 +53,14 @@ final class RemotePokemonManager: RemotePokemonService {
     }
     
     /**
-        Given an array of json objects that represent different Pokemon, fetch additional data for each one
-        Return this addtional data to whoever is listening
+       Fetch and emit additional data for a list of Pokemon
+     
+        - parameter pokemon: An array of JSON objects with light information for different Pokemon
      */
     private func process(pokemon: [JSONPokemon]){
-        /// - fetched detailed information for each pokemon, using the detail url
-        /// - for each response from the server, parse the json dictionary, removing nil entries
-        /// - convert each json dictionary into a custom Pokemon object
+        // - fetched detailed information for each pokemon, using the detail url
+        // - for each response from the server, parse the json dictionary, removing nil entries
+        // - convert each json dictionary into a custom Pokemon object
         _ = Observable
             .zip(pokemon.map({ RxSession.manager.rx.data(.get, $0.url)}))
             .map({ $0.flatMap({ Parse.Pokemon.Detail.single(from: $0) })})

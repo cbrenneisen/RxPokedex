@@ -16,7 +16,6 @@ target 'RxPokedex' do
     pod 'RxRealm'
     pod 'RxSwiftExt'    
     pod 'Kingfisher' 
-    pod 'SDWebImage'
 
   target 'RxPokedexTests' do
     inherit! :search_paths

@@ -36,6 +36,8 @@
 		49B8FDF51FA5068F008C283B /* RemotePokemonInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B8FDF41FA5068F008C283B /* RemotePokemonInjection.swift */; };
 		49B8FDF71FA507B5008C283B /* LoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B8FDF61FA507B5008C283B /* LoadingViewModel.swift */; };
 		49B8FDF91FA523CD008C283B /* JSONPokemonDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B8FDF81FA523CD008C283B /* JSONPokemonDetail.swift */; };
+		49E9ABC420192CA90038A14D /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E9ABC320192CA90038A14D /* UIImage.swift */; };
+		49E9ABC620192DCC0038A14D /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E9ABC520192DCC0038A14D /* Int.swift */; };
 		AF7ADDB950EC67B06B554122 /* Pods_RxPokedexTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5221E6B3AC2B3423093DF6D /* Pods_RxPokedexTests.framework */; };
 		C0C5BADBF37882A13CE7FB52 /* Pods_RxPokedex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942E999F77E29425798C5268 /* Pods_RxPokedex.framework */; };
 /* End PBXBuildFile section */
@@ -93,6 +95,8 @@
 		49B8FDF41FA5068F008C283B /* RemotePokemonInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePokemonInjection.swift; sourceTree = "<group>"; };
 		49B8FDF61FA507B5008C283B /* LoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewModel.swift; sourceTree = "<group>"; };
 		49B8FDF81FA523CD008C283B /* JSONPokemonDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONPokemonDetail.swift; sourceTree = "<group>"; };
+		49E9ABC320192CA90038A14D /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		49E9ABC520192DCC0038A14D /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		942E999F77E29425798C5268 /* Pods_RxPokedex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxPokedex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A73193B3EA697A91A4C52A53 /* Pods-RxPokedexUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxPokedexUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxPokedexUITests/Pods-RxPokedexUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C4AF55C77930583F22323800 /* Pods-RxPokedexUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxPokedexUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxPokedexUITests/Pods-RxPokedexUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -141,19 +145,21 @@
 			path = "Json Objects";
 			sourceTree = "<group>";
 		};
-		494FDE732012E3C900D0B57D /* View */ = {
+		494FDE732012E3C900D0B57D /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				49B8FDE11FA4081E008C283B /* WildPokemonSectionView.swift */,
 				499C32821FA395200071A110 /* WildPokemonCell.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		495407F41FA6509100F67BF4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				495407F51FA650A000F67BF4 /* UIColor.swift */,
+				49E9ABC320192CA90038A14D /* UIImage.swift */,
+				49E9ABC520192DCC0038A14D /* Int.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -192,12 +198,12 @@
 		499C32511FA2BEF30071A110 /* RxPokedex */ = {
 			isa = PBXGroup;
 			children = (
-				494FDE732012E3C900D0B57D /* View */,
+				494FDE732012E3C900D0B57D /* Views */,
 				49B8FDF31FA5066F008C283B /* Injection */,
 				495407F41FA6509100F67BF4 /* Extensions */,
-				49B8FDEB1FA4FA19008C283B /* Service */,
-				49B8FDE81FA4F868008C283B /* Storage */,
-				49B8FDE31FA418AB008C283B /* Entity */,
+				49B8FDEB1FA4FA19008C283B /* Remote Service */,
+				49B8FDE81FA4F868008C283B /* Persistence */,
+				49B8FDE31FA418AB008C283B /* Entities */,
 				49B8FDDF1FA407C3008C283B /* Scenes */,
 				49562D401FA3D4AF00DDA8E0 /* Utility */,
 				499C32521FA2BEF30071A110 /* AppDelegate.swift */,
@@ -248,23 +254,23 @@
 			path = "Wild Pokemon";
 			sourceTree = "<group>";
 		};
-		49B8FDE31FA418AB008C283B /* Entity */ = {
+		49B8FDE31FA418AB008C283B /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				49B8FDE41FA418BB008C283B /* Pokemon.swift */,
 			);
-			path = Entity;
+			path = Entities;
 			sourceTree = "<group>";
 		};
-		49B8FDE81FA4F868008C283B /* Storage */ = {
+		49B8FDE81FA4F868008C283B /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
 				49B8FDE91FA4F87A008C283B /* RealmPokemon.swift */,
 			);
-			path = Storage;
+			path = Persistence;
 			sourceTree = "<group>";
 		};
-		49B8FDEB1FA4FA19008C283B /* Service */ = {
+		49B8FDEB1FA4FA19008C283B /* Remote Service */ = {
 			isa = PBXGroup;
 			children = (
 				4917787D2012FBE4009D599D /* Json Objects */,
@@ -272,7 +278,7 @@
 				494FDE762012F57200D0B57D /* API.swift */,
 				491778822012FDBB009D599D /* Parse.swift */,
 			);
-			path = Service;
+			path = "Remote Service";
 			sourceTree = "<group>";
 		};
 		49B8FDEE1FA4FFCF008C283B /* Loading */ = {
@@ -554,7 +560,6 @@
 				"${BUILT_PRODUCTS_DIR}/RxRealm/RxRealm.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwiftExt/RxSwiftExt.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -569,7 +574,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRealm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwiftExt.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -640,6 +644,7 @@
 				499C32551FA2BEF30071A110 /* WildPokemonViewController.swift in Sources */,
 				49B8FDF71FA507B5008C283B /* LoadingViewModel.swift in Sources */,
 				494FDE752012E3FE00D0B57D /* WildPokemonDataSource.swift in Sources */,
+				49E9ABC420192CA90038A14D /* UIImage.swift in Sources */,
 				495407F61FA650A000F67BF4 /* UIColor.swift in Sources */,
 				499C32531FA2BEF30071A110 /* AppDelegate.swift in Sources */,
 				49B8FDEA1FA4F87A008C283B /* RealmPokemon.swift in Sources */,
@@ -652,6 +657,7 @@
 				499C32831FA395200071A110 /* WildPokemonCell.swift in Sources */,
 				49B8FDF21FA50647008C283B /* InjectionMap.swift in Sources */,
 				49B8FDF51FA5068F008C283B /* RemotePokemonInjection.swift in Sources */,
+				49E9ABC620192DCC0038A14D /* Int.swift in Sources */,
 				495407FA1FA76DD100F67BF4 /* WildPokemonInteractor.swift in Sources */,
 				49B8FDE21FA4081E008C283B /* WildPokemonSectionView.swift in Sources */,
 			);

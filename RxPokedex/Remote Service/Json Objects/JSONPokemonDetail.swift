@@ -8,10 +8,11 @@
 
 import Foundation
 
-/*
+/**
 Represents a detailed pokemon object from the server
-forms: an array containing the different pokemon instances (normal, shiny, etc)
-sprites: an array containing image urls for all the different instances
+ 
+ - property forms: an array containing variances (normal, shiny, rare, etc)
+ - property sprites: an array containing image urls for the corresponding variances
  */
 
 struct JSONPokemonDetail: Decodable {
