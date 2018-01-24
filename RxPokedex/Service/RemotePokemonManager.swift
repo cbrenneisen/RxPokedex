@@ -11,7 +11,6 @@ import RxSwift
 import Alamofire
 import RxAlamofire
 import RxSwiftExt
-import RxCocoa
 
 fileprivate struct RxSession {
     static var manager: SessionManager {
@@ -31,21 +30,44 @@ final class RemotePokemonManager: RemotePokemonService {
     
     private let disposeBag = DisposeBag()
     
-    var wildPokemon: Observable<[Pokemon]> {
-        return gatheredPokemon
-                .map({ Observable.zip($0.map({ RxSession.manager.rx.data(.get, $0.url)})) })
-                .flatMap({ $0 })
-                .map({ $0.flatMap({ Parse.Pokemon.Detail.single(from: $0) })})
-                .map({ $0.flatMap({( Pokemon(json: $0))}) })
-    }
+    var wildPokemon: Observable<[Pokemon]> { return _wildPokemon }
+    private var _wildPokemon = PublishSubject<[Pokemon]>()
     
-    private var gatheredPokemon = PublishSubject<[JSONPokemon]>()
-    
+    /**
+        Initiates a request to get Pokemon from the server
+     
+        - parameter page: The offset for which to start searching for Pokemon
+     */
     func requestPokemon(page: Int){
         _ = RxSession.manager.rx.data(.get, API.AllPokemon.with(page: page))
             .subscribeOn(RxSession.scheduler)
             .map({ Parse.Pokemon.Summary.list(from: $0) })
             .unwrap()
-            .bind(to: gatheredPokemon)
+            .subscribe(onNext: { [weak self] pokemon in
+                self?.process(pokemon: pokemon)
+            }, onError: { [weak self] error in
+                self?._wildPokemon.onError(error)
+            })
+    }
+    
+    /**
+        Given an array of json objects that represent different Pokemon, fetch additional data for each one
+        Return this addtional data to whoever is listening
+     */
+    private func process(pokemon: [JSONPokemon]){
+        /// - fetched detailed information for each pokemon, using the detail url
+        /// - for each response from the server, parse the json dictionary, removing nil entries
+        /// - convert each json dictionary into a custom Pokemon object
+        _ = Observable
+            .zip(pokemon.map({ RxSession.manager.rx.data(.get, $0.url)}))
+            .map({ $0.flatMap({ Parse.Pokemon.Detail.single(from: $0) })})
+            .map({ $0.flatMap({( Pokemon(json: $0))}) })
+            .subscribe(onNext: { [weak self] poke in
+                /// - pass along data
+                self?._wildPokemon.onNext(poke)
+            }, onError: { [weak self] error in
+                /// - pass along errors
+                self?._wildPokemon.onError(error)
+            })
     }
 }

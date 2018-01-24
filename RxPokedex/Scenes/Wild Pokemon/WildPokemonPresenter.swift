@@ -68,7 +68,7 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
     private static func process(inputPokemon: [Pokemon]) -> [WildPokemonSection] {
         //Apply view logic to a regular array of pokemon - divide into sections
         let nSections = 2
-        let nItems = 10
+        let nItems = inputPokemon.count / nSections
         return (0 ..< nSections).map { (i: Int) in
             WildPokemonSection(
                 header: "Section \(i + 1)",

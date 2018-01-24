@@ -34,8 +34,12 @@ final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemon
         
         remotePokemonService
             .wildPokemon
-            .bind(to: currentPokemon)
-            .disposed(by: disposeBag)
+            .subscribe(onNext: { [weak self] poke in
+                print("got pokemon")
+                self?.currentPokemon.onNext(poke)
+            }).disposed(by: disposeBag)
+//            .bind(to: currentPokemon)
+//            .disposed(by: disposeBag)
         
         Observable.of(reloader.map { _ in () })
             .merge()

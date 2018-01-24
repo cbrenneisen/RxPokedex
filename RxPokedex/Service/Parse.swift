@@ -17,7 +17,7 @@ struct Parse {
             static func list(from: Data) -> [JSONPokemon]? {
                 do { return try JSONDecoder().decode(JSONPokemonResult.self, from: from).results }
                 catch let e as NSError {
-                    print(e.localizedDescription)
+                    error.onNext(e.localizedDescription)
                     return nil
                 }
             }
@@ -26,7 +26,7 @@ struct Parse {
             static func single(from: Data) -> JSONPokemonDetail? {
                 do { return try JSONDecoder().decode(JSONPokemonDetail.self, from: from) }
                 catch let e as NSError {
-                    print(e.localizedDescription)
+                    error.onNext(e.localizedDescription)
                     return nil
                 }
             }
