@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import RandomKit
 
 protocol WildPokemonInteractorInterface {
     
@@ -27,6 +28,7 @@ final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemon
     init(initialData: [Pokemon]){
         self.page = initialData.isEmpty ? 0 : 1
         self.currentPokemon = BehaviorSubject<[Pokemon]>(value: initialData)
+        
         setupObservers()
     }
     

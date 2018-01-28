@@ -9,11 +9,37 @@
 import Foundation
 import RxSwift
 import RxDataSources
+import RandomKit
 
 protocol WildPokemonPresenterInterface: class {
     
     var sections: Observable<[WildPokemonSection]> { get }
     var cvDataSource: RxCollectionViewSectionedAnimatedDataSource<WildPokemonSection> { get }
+}
+
+fileprivate struct Shuffler {
+    
+    private static var shuffleThread = Xoroshiro.threadLocal
+    
+    static func shuffle(pokemon: [Pokemon]) -> [WildPokemonSection] {
+        
+        let poke = pokemon.shuffled(using: &shuffleThread.pointee)
+        let maxSections = max(1, poke.count/4)
+        let numSections = Int.random(in: 1...maxSections, using: &shuffleThread.pointee)
+        let nItems = poke.count / numSections
+        return (0 ..< numSections).map { (i: Int) in
+            WildPokemonSection(
+                header: "Section \(i + 1)",
+                pokemon: Array(poke[i*nItems..<((i + 1) * nItems)]),
+                updated: Date()) }
+    }
+    
+    //TODO: put in generic extension (array where... number?)
+    private static func normalize(data: [Int]) -> [Int] {
+        let max = data.max() ?? 1
+        let min = data.min() ?? 1
+        return data.map({ ($0 - min) / (max - min)})
+    }
 }
 
 final class WildPokemonPresenter: WildPokemonPresenterInterface {
@@ -25,6 +51,13 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
             weakSelf.randomPokemonSections = weakSelf.randomPokemonSections.randomize()
             return weakSelf.randomPokemonSections.sections
         })
+    }
+    
+    
+    var testSections: Observable<[WildPokemonSection]> {
+        return Observable.combineLatest(
+            shuffler,
+            interactor.currentPokemon).map({ Shuffler.shuffle(pokemon: $1) })
     }
     
     //MARK: Architecture
@@ -53,6 +86,12 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
     }
     
     private func setupBindings(){
+        
+        testSections
+            .subscribe(onNext: { poke in
+                print("Shuffled!")
+                //print(poke.debugDescription)
+            }).disposed(by: disposeBag)
 
         //listen for changes to the current batch of pokemon
         interactor

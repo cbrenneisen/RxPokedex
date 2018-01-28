@@ -40,11 +40,10 @@ extension WildPokemonSection: AnimatableSectionModelType {
     }
 }
 
+
 extension WildPokemonSection: Equatable {
     
     static func == (lhs: WildPokemonSection, rhs: WildPokemonSection) -> Bool {
         return lhs.header == rhs.header && lhs.items == rhs.items && lhs.updated == rhs.updated
     }
 }
-
-

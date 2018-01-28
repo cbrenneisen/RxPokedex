@@ -8,7 +8,6 @@
 
 import Foundation
 import RxSwift
-import RxCocoa
 
 protocol RemotePokemonServiceInjected { }
 
@@ -16,6 +15,8 @@ extension RemotePokemonServiceInjected {
     
     var remotePokemonService: RemotePokemonService { get { return InjectionMap.pokemonService } }
 }
+
+
 
 protocol RemotePokemonService {
     

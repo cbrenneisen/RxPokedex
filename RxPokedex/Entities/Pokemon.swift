@@ -8,6 +8,7 @@
 
 import Foundation
 import RxDataSources
+import RandomKit
 
 struct Pokemon {
     let number: Int
@@ -33,6 +34,9 @@ struct Pokemon {
     }
 }
 
+/**
+ Extension to make Pokemon objects play with RxDatasources
+*/
 extension Pokemon: IdentifiableType, Equatable {
 
     typealias Identity = Int
@@ -45,3 +49,5 @@ extension Pokemon: IdentifiableType, Equatable {
         return lhs.number == rhs.number && lhs.date == rhs.date
     }
 }
+
+
