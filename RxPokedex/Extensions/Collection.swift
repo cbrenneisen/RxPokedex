@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Darwin
 
 extension Collection where Element == Int  {
     func normalize() -> [Double] {
@@ -17,7 +16,8 @@ extension Collection where Element == Int  {
 
 extension Collection where Element: FloatingPoint {
     func normalize() -> [Element] {
-        guard let high = self.max(), let low = self.min() else { return [] }
+        guard !isEmpty, let high = self.max(), let low = self.min() else { return [] }
+        guard count > 1 else { return [1] }
         return flatMap({ ($0 - low) / (high - low) })
     }
 }
