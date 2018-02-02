@@ -14,6 +14,5 @@ import Foundation
  - property results: an array of pokemon objects
  */
 struct JSONPokemonResult: Decodable {
-
     let results: [JSONPokemon]
 }

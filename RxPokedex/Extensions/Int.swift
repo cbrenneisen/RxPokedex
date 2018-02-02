@@ -9,7 +9,6 @@
 import Foundation
 
 extension Int {
-    
     static var randomID: Int {
         return Int(arc4random_uniform(UInt32.max))
     }

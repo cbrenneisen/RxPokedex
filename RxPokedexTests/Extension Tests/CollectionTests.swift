@@ -90,6 +90,15 @@ class CollectionTests: XCTestCase {
         XCTAssertEqual(result, [0.0, 1.0])
     }
     
+    //MARK: - Fit Into Tests
+    
+    func testFirst(){
+        let nums = [0.0, 0.4, 0.8, 1.0]
+        let result = nums.fit(into: 20)
+        print(result)
+        XCTAssertEqual(result, [])
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {

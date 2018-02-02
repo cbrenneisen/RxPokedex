@@ -26,19 +26,15 @@ fileprivate struct Shuffler {
         let poke = pokemon.shuffled(using: &shuffleThread.pointee)
         let maxSections = max(1, poke.count/4)
         let numSections = Int.random(in: 1...maxSections, using: &shuffleThread.pointee)
+        let sec: [Int] = Array(randomCount: numSections, using: &shuffleThread.pointee)
+        
+        
         let nItems = poke.count / numSections
         return (0 ..< numSections).map { (i: Int) in
             WildPokemonSection(
                 header: "Section \(i + 1)",
                 pokemon: Array(poke[i*nItems..<((i + 1) * nItems)]),
                 updated: Date()) }
-    }
-    
-    //TODO: put in generic extension (array where... number?)
-    private static func normalize(data: [Int]) -> [Int] {
-        let max = data.max() ?? 1
-        let min = data.min() ?? 1
-        return data.map({ ($0 - min) / (max - min)})
     }
 }
 
