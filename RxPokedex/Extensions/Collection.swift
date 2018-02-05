@@ -9,27 +9,10 @@
 import Foundation
 import RandomKit
 
-fileprivate struct Random {
-    static let thread = Xoroshiro.threadLocal
-}
-
 extension Collection where Element == Double {
     
     func fit(into: Int) -> [Int]{
-        let items = map{ Swift.max(Int($0 * Double(into)), 1) }
-        let total = items.reduce(0, +)  //the current total
-        if total == into { return items } //if we already fit, return
-
-        let size = Int(self.count)
-        let x = Swift.max(total / into - 1, 0)
-        let y = total % into
-
-        var ooo = Array(repeating: x * size, count: size)
-        for _ in 0..<y {
-            let index = Int.random(in: 0..<size, using: &Random.thread.pointee) ?? 0
-            ooo[index] += 1
-        }
-        return zip(items, ooo).map({ total < into ? $0 + $1 : $0 - $1 })
+        return map{ Swift.max(Int(($0 * Double(into)/2)), 1) }.fit(into: into)
     }
 }
 
@@ -38,7 +21,35 @@ extension Collection where Element == Int  {
     func normalize() -> [Double] {
         return self.flatMap({ Double($0) }).normalize()
     }
+    
     //decreases and increments numbers accordingly so that they all add up to one number
+    func fit(into: Int) -> [Int]{
+        
+        //base cases
+        if isEmpty { return [] }
+        if count == 1 { return [into]}
+        
+        var items = Array(self)
+        let total = items.reduce(0, +)  //the current total
+    
+        if total == into { return items } //if we already fit, return
+        
+        let size = Int(self.count)
+
+        var offset = abs(total - into)
+        var i = 0
+        while offset > 0 {
+            if total < into, items[i] < into-1 {
+                items[i] += 1
+                offset -= 1
+            }else if total > into, items[i] > 1 {
+                items[i] -= 1
+                offset -= 1
+            }
+            i = (i == size-1) ? 0 : i + 1
+        }
+        return items
+    }
 }
 
 extension Collection where Element: FloatingPoint {
@@ -47,8 +58,4 @@ extension Collection where Element: FloatingPoint {
         guard count > 1 else { return [1] }
         return flatMap({ ($0 - low) / (high - low) })
     }
-}
-
-extension Array where Element: FloatingPoint {
-    
 }

@@ -10,6 +10,10 @@ import XCTest
 import RandomKit
 @testable import RxPokedex
 
+fileprivate struct RandomUtil {
+    static let thread = Xoroshiro.threadLocal
+}
+
 class CollectionTests: XCTestCase {
     
     override func setUp() {
@@ -90,13 +94,65 @@ class CollectionTests: XCTestCase {
         XCTAssertEqual(result, [0.0, 1.0])
     }
     
-    //MARK: - Fit Into Tests
+    //MARK: - Test Fit Into
     
-    func testFirst(){
+    //MARK: Int
+    func testFitNone(){
+        let nums: [Int] = []
+        let result = nums.fit(into: Int.random(using: &RandomUtil.thread.pointee))
+        
+        XCTAssertTrue(result.isEmpty, "Array should be empty")
+    }
+    
+    func testIntFitOne(){
+        let nums = [Int.random]
+        let target = Int.random
+        let result = nums.fit(into: target)
+        
+        XCTAssertEqual(result.count, 1, "Only one element should be returned")
+        XCTAssertEqual(result.reduce(0, +), target, "Array should fit into target")
+    }
+    
+    func testIntFitTwo(){
+        let nums = [15, 72]
+        let target = 50
+        let result = nums.fit(into: target).reduce(0, +)
+        
+        XCTAssertEqual(result, target, "Array should fit into target")
+    }
+
+    func testIntFitMany(){
+        let nums = [13, 44, 17, 60, 77, 12]
+        let target = 100
+        let result = nums.fit(into: target).reduce(0, +)
+        
+        XCTAssertEqual(result, target, "Array should fit into target")
+    }
+
+    //MARK: Double
+    func testDoubleFitOne(){
+        let nums = [0.5]
+        let target = 10
+        let result = nums.fit(into: target)
+        
+        XCTAssertEqual(result.count, 1, "Only one element should be returned")
+        XCTAssertEqual(result.reduce(0, +), target, "Array should fit into target")
+    }
+    
+    func testDoubleFitTwo(){
+        let nums = [0.3, 0.6]
+        let target = 20
+        let result = nums.fit(into: target).reduce(0, +)
+        
+        XCTAssertEqual(result, target, "Array should fit into target")
+    }
+    
+    func testDoubleFitMany(){
         let nums = [0.0, 0.4, 0.8, 1.0]
-        let result = nums.fit(into: 20)
-        print(result)
-        XCTAssertEqual(result, [])
+        let target = 20
+        let result = nums.fit(into: target).reduce(0, +)
+        
+        XCTAssertEqual(result, target, "Array should fit into target")
     }
     
     func testPerformanceExample() {
