@@ -11,23 +11,21 @@ import RxDataSources
 
 struct WildPokemonSection {
     
-    var header: String
+    var number: Int
     var pokemon: [Pokemon]
-    var updated: Date
     
-    init(header: String, pokemon: [Item], updated: Date) {
-        self.header = header
+    init(number: Int, pokemon: [Item]) {
+        self.number = number
         self.pokemon = pokemon
-        self.updated = updated
     }
 }
 
 extension WildPokemonSection: AnimatableSectionModelType {
     typealias Item = Pokemon
-    typealias Identity = String
+    typealias Identity = Int
     
-    var identity: String {
-        return header
+    var identity: Int {
+        return number
     }
     
     var items: [Pokemon] {
@@ -40,10 +38,9 @@ extension WildPokemonSection: AnimatableSectionModelType {
     }
 }
 
-
 extension WildPokemonSection: Equatable {
     
     static func == (lhs: WildPokemonSection, rhs: WildPokemonSection) -> Bool {
-        return lhs.header == rhs.header && lhs.items == rhs.items && lhs.updated == rhs.updated
+        return lhs.number == rhs.number // && lhs.updated == rhs.updated
     }
 }

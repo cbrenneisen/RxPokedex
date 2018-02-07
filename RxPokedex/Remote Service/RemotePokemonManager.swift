@@ -13,6 +13,7 @@ import RxAlamofire
 import RxSwiftExt
 
 fileprivate struct RxSession {
+    
     static var manager: SessionManager {
         let configuration = URLSessionConfiguration.default
         let cacheLength = 24 * 60 * 60
