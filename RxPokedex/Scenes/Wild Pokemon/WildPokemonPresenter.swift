@@ -22,9 +22,7 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
     //MARK: Protocol
     var sections: Observable<[WildPokemonSection]> {
         return Observable
-            .combineLatest(
-                shuffler,
-                interactor.currentPokemon)
+            .combineLatest(shuffler, interactor.pokemon)
             .map({ $1.shuffle() })
     }
     
@@ -44,5 +42,18 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
         self.cvDataSource = RxCollectionViewSectionedAnimatedDataSource(
             configureCell: dataSource.configureCell(),
             configureSupplementaryView: dataSource.configureSection())
+        setupObservers()
     }
+    
+    func setupObservers(){
+        
+        dataSource
+            .capturedPokemon
+            .subscribe(onNext : { [weak self] pokemon in
+                self?.interactor.capture(pokemon: pokemon)
+                //print("Pokemon at \(indexPath.section),\(indexPath.row) tapped ")
+            }).disposed(by: disposeBag)
+    }
+    
+    
 }

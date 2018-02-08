@@ -17,39 +17,22 @@ extension Array where Element == Pokemon {
 
     func shuffle() -> [WildPokemonSection] {
         var pokemon = shuffled(using: &Shuffler.thread.pointee)
-        let maxSections = Swift.max(1, pokemon.count/4)
-        let numSections = Int.random(in: 1...maxSections, using: &Shuffler.thread.pointee)
-        let sections = Swift.Array(randomCount: numSections, in: 1..<20, using: &Shuffler.thread.pointee).fit(into: 20)
+        let sections = sectionCounts()
         
-        var sec: [WildPokemonSection] = []
-        for (i, n) in sections.enumerated() {
-            var p: [Pokemon] = []
-            for _ in 0..<n {
-                p.append(pokemon.removeLast())
-            }
-            sec.append(WildPokemonSection(
-                number: i,
-                pokemon: p))
-            //            var o = WildPokemonSection(
-            //                header: "Section \(n + 1)",
-            //                pokemon: (0..<n).map({_ in poke.removeLast() }),
-            //                updated: Date())
-            //            sec.append(o)
-        }
-        return sec
-        
-        //        return sections.enumerated().map({ obj in
-        //            let start = max(sections[0..<obj.offset].reduce(0, +) - 1, 0)
-        //            let end = start + obj.element - 1
-        //            print("Adding \(start)-\(end)")
-        //            return WildPokemonSection(
-        //                header: "Section \(obj.element + 1)",
-        //                pokemon: Array(poke[start..<end]),
-        //                updated: Date())
-        //        })
-        //
+        return sections.enumerated().map({ obj in
+            let start = sections.count > 1 ? sections[0..<obj.offset].reduce(0, +) : 0
+            let end = start + obj.element
+            return WildPokemonSection(
+                number: obj.offset,
+                pokemon: Array(pokemon[start..<end]))
+        })
     }
+}
 
-    
-    
+extension Array {
+    func sectionCounts(maxSections: Int? = nil) -> [Int]{
+        let maxSec = maxSections ?? Swift.max(1, count/4)
+        let numSec = Int.random(in: 1...maxSec, using: &Shuffler.thread.pointee)
+        return Swift.Array(randomCount: numSec, in: 1..<count, using: &Shuffler.thread.pointee).fit(into: count)
+    }
 }

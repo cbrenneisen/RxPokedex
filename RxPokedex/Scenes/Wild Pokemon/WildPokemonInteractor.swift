@@ -13,13 +13,14 @@ import RandomKit
 
 protocol WildPokemonInteractorInterface {
     
-    var currentPokemon: BehaviorSubject<[Pokemon]> { get }
+    var pokemon: Observable<[Pokemon]> { get }
     func capture(pokemon: Pokemon)
 }
 
 final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemonServiceInjected {
 
-    var currentPokemon: BehaviorSubject<[Pokemon]>
+    var pokemon: Observable<[Pokemon]> { return currentPokemon.asObservable() }
+    var currentPokemon: Variable<[Pokemon]>
 
     private var page: Int
     private let reloader = Observable<Int>.interval(15, scheduler: MainScheduler.instance)
@@ -27,7 +28,7 @@ final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemon
     
     init(initialData: [Pokemon]){
         self.page = initialData.isEmpty ? 0 : 1
-        self.currentPokemon = BehaviorSubject<[Pokemon]>(value: initialData)
+        self.currentPokemon = Variable<[Pokemon]>(initialData)
         
         setupObservers()
     }
@@ -53,5 +54,7 @@ final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemon
     
     func capture(pokemon: Pokemon) {
         //TODO
+        print("Captured \(pokemon.name)!" )
+        currentPokemon.value = currentPokemon.value.filter({ $0 != pokemon })
     }
 }
