@@ -17,10 +17,9 @@ extension RemotePokemonServiceInjected {
 }
 
 
-
 protocol RemotePokemonService {
     
-    var wildPokemon: Observable<[Pokemon]> { get }
+    var wildPokemon: Observable<[WildPokemon]> { get }
     func requestPokemon(page: Int)
 }
 

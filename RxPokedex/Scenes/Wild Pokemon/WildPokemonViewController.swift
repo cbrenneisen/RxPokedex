@@ -18,7 +18,7 @@ final class WildPokemonViewController: UIViewController {
     @IBOutlet weak var refreshButton: UIButton!
     
     //MARK: Flow
-    var injection: [Pokemon]?
+    var injection: [WildPokemon]?
     var presenter: WildPokemonPresenter!
     
     let disposeBag = DisposeBag()

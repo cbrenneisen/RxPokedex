@@ -12,7 +12,7 @@ import RxDataSources
 
 final class WildPokemonDataSource {
     
-    var capturedPokemon = PublishSubject<Pokemon>()
+    var capturedPokemon = PublishSubject<WildPokemon>()
     private let disposeBag = DisposeBag()
     
     func configureCell() -> CollectionViewSectionedDataSource<WildPokemonSection>.ConfigureCell {
@@ -22,7 +22,7 @@ final class WildPokemonDataSource {
                 withReuseIdentifier: WildPokemonCell.identifier,
                 for: indexPath) as! WildPokemonCell
             
-            cell.configureWith(pokemon: pokemon as Pokemon)
+            cell.configureWith(pokemon: pokemon)
             cell.captured
                 .map({ _ in pokemon })
                 .bind(to: self.capturedPokemon)

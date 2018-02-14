@@ -17,6 +17,6 @@ class RealmPokemon: Object {
     @objc dynamic var date: Date = Date()
     
     override static func primaryKey() -> String? {
-        return "cardioEntryID"
+        return "pokemonID"
     }
 }

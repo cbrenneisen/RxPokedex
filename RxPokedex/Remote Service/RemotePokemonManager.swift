@@ -31,8 +31,8 @@ final class RemotePokemonManager: RemotePokemonService {
     
     private let disposeBag = DisposeBag()
     
-    var wildPokemon: Observable<[Pokemon]> { return _wildPokemon }
-    private var _wildPokemon = PublishSubject<[Pokemon]>()
+    var wildPokemon: Observable<[WildPokemon]> { return _wildPokemon }
+    private var _wildPokemon = PublishSubject<[WildPokemon]>()
     
     /**
         Initiates a request to get Pokemon from the server
@@ -41,14 +41,18 @@ final class RemotePokemonManager: RemotePokemonService {
      */
     func requestPokemon(page: Int){
         // - fetch the data for the corresponding offset from the server
-        //
+        // - parse the result into Pokemon objects
+        // - filter out nils
+        
         _ = RxSession.manager.rx.data(.get, API.AllPokemon.with(page: page))
             .subscribeOn(RxSession.scheduler)
             .map({ Parse.Pokemon.Summary.list(from: $0) })
             .unwrap()
             .subscribe(onNext: { [weak self] pokemon in
+                // - get extra information for the returned pokemon
                 self?.process(pokemon: pokemon)
             }, onError: { [weak self] error in
+                // - pass along errors
                 self?._wildPokemon.onError(error)
             })
     }
@@ -62,10 +66,11 @@ final class RemotePokemonManager: RemotePokemonService {
         // - fetched detailed information for each pokemon, using the detail url
         // - for each response from the server, parse the json dictionary, removing nil entries
         // - convert each json dictionary into a custom Pokemon object
+        
         _ = Observable
             .zip(pokemon.map({ RxSession.manager.rx.data(.get, $0.url)}))
             .map({ $0.flatMap({ Parse.Pokemon.Detail.single(from: $0) })})
-            .map({ $0.flatMap({( Pokemon(json: $0))}) })
+            .map({ $0.flatMap({( WildPokemon(json: $0))}) })
             .subscribe(onNext: { [weak self] poke in
                 /// - pass along data
                 self?._wildPokemon.onNext(poke)

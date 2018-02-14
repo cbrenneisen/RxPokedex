@@ -56,9 +56,9 @@ final class WildPokemonCell: UICollectionViewCell {
     }
     
     //MARK: - Image Setting
-    func configureWith(pokemon: Pokemon){
+    func configureWith(pokemon: WildPokemon){
         pokemonImageView.kf.setImage(
-            with: pokemon.image,
+            with: pokemon.imageURL,
             placeholder: UIImage.Image.placeholder)
     }
     

@@ -35,7 +35,7 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
     private let shuffler = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
     private let disposeBag = DisposeBag()
         
-    init(initialData: [Pokemon] = []){
+    init(initialData: [WildPokemon] = []){
         
         self.interactor = WildPokemonInteractor(initialData: initialData)
         self.dataSource = WildPokemonDataSource()

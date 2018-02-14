@@ -12,7 +12,7 @@ import RxDataSources
 struct WildPokemonSection {
     
     var number: Int
-    var pokemon: [Pokemon]
+    var pokemon: [WildPokemon]
     
     init(number: Int, pokemon: [Item]) {
         self.number = number
@@ -21,14 +21,14 @@ struct WildPokemonSection {
 }
 
 extension WildPokemonSection: AnimatableSectionModelType {
-    typealias Item = Pokemon
+    typealias Item = WildPokemon
     typealias Identity = Int
     
     var identity: Int {
         return number
     }
     
-    var items: [Pokemon] {
+    var items: [WildPokemon] {
         return pokemon
     }
     

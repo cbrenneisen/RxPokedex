@@ -13,6 +13,11 @@ import RxCocoa
 final class LoadingViewModel: RemotePokemonServiceInjected {
     
     let gatheredPokemon = PublishSubject<[Pokemon]>()
+    
+    var title: Observable<String>{
+        return loading.map({ $0 ? "Looking for Pokemon" : "Found Pokemon!" })
+    }
+    
     let loading = BehaviorSubject<Bool>(value: true)
     var disposeBag = DisposeBag()
         

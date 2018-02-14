@@ -13,22 +13,22 @@ import RandomKit
 
 protocol WildPokemonInteractorInterface {
     
-    var pokemon: Observable<[Pokemon]> { get }
-    func capture(pokemon: Pokemon)
+    var pokemon: Observable<[WildPokemon]> { get }
+    func capture(pokemon: WildPokemon)
 }
 
-final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemonServiceInjected {
+final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemonServiceInjected, LocalPokemonServiceInjected {
 
-    var pokemon: Observable<[Pokemon]> { return currentPokemon.asObservable() }
-    var currentPokemon: Variable<[Pokemon]>
+    var pokemon: Observable<[WildPokemon]> { return currentPokemon.asObservable() }
+    var currentPokemon: Variable<[WildPokemon]>
 
     private var page: Int
     private let reloader = Observable<Int>.interval(15, scheduler: MainScheduler.instance)
     private let disposeBag = DisposeBag()
     
-    init(initialData: [Pokemon]){
+    init(initialData: [WildPokemon]){
         self.page = initialData.isEmpty ? 0 : 1
-        self.currentPokemon = Variable<[Pokemon]>(initialData)
+        self.currentPokemon = Variable<[WildPokemon]>(initialData)
         
         setupObservers()
     }
@@ -52,9 +52,14 @@ final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemon
         page +=  1
     }
     
-    func capture(pokemon: Pokemon) {
-        //TODO
-        print("Captured \(pokemon.name)!" )
-        currentPokemon.value = currentPokemon.value.filter({ $0 != pokemon })
+    func capture(pokemon: WildPokemon) {
+        print("Captured \(pokemon.name)!")
+        currentPokemon.value = currentPokemon.value.filter({ $0.uuid != pokemon.uuid })
+        localPokemonService.capture(pokemon: pokemon){ error in
+            //TODO: handle error
+            if let e = error {
+                print(e.description)
+            }
+        }
     }
 }

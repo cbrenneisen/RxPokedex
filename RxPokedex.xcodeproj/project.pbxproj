@@ -13,15 +13,18 @@
 		4917787F2012FBF5009D599D /* JSONPokemonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4917787E2012FBF5009D599D /* JSONPokemonResult.swift */; };
 		491778812012FC65009D599D /* JSONPokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491778802012FC65009D599D /* JSONPokemon.swift */; };
 		491778832012FDBB009D599D /* Parse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491778822012FDBB009D599D /* Parse.swift */; };
-		493312D2202CDA0700360FF4 /* captured.gif in Resources */ = {isa = PBXBuildFile; fileRef = 493312D1202CDA0700360FF4 /* captured.gif */; };
 		493312D4202CDA9C00360FF4 /* rollingPokeball.gif in Resources */ = {isa = PBXBuildFile; fileRef = 493312D3202CDA9C00360FF4 /* rollingPokeball.gif */; };
+		493312D6202CE96900360FF4 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493312D5202CE96900360FF4 /* Realm.swift */; };
+		493312D8202CEE3500360FF4 /* PersistenceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493312D7202CEE3500360FF4 /* PersistenceError.swift */; };
+		494308082032211400D103A0 /* CaughtPokemonSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494308072032211400D103A0 /* CaughtPokemonSection.swift */; };
+		4943080D20324E8E00D103A0 /* CaughtPokemonDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943080C20324E8E00D103A0 /* CaughtPokemonDataSource.swift */; };
+		4943080F2033593900D103A0 /* CaughtPokemonInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943080E2033593800D103A0 /* CaughtPokemonInteractor.swift */; };
+		49430811203487E300D103A0 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49430810203487E300D103A0 /* Dictionary.swift */; };
 		494FDE752012E3FE00D0B57D /* WildPokemonDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494FDE742012E3FE00D0B57D /* WildPokemonDataSource.swift */; };
 		494FDE772012F57200D0B57D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494FDE762012F57200D0B57D /* API.swift */; };
 		495407F61FA650A000F67BF4 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495407F51FA650A000F67BF4 /* UIColor.swift */; };
 		495407F81FA652BF00F67BF4 /* WildPokemonSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495407F71FA652BF00F67BF4 /* WildPokemonSection.swift */; };
 		495407FA1FA76DD100F67BF4 /* WildPokemonInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495407F91FA76DD100F67BF4 /* WildPokemonInteractor.swift */; };
-		49562D631FA402D600DDA8E0 /* Randomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49562D621FA402D600DDA8E0 /* Randomizer.swift */; };
-		49562D651FA402F600DDA8E0 /* NumberSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49562D641FA402F600DDA8E0 /* NumberSection.swift */; };
 		49982A80201A799C00808EA5 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49982A7F201A799C00808EA5 /* Collection.swift */; };
 		499C32531FA2BEF30071A110 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499C32521FA2BEF30071A110 /* AppDelegate.swift */; };
 		499C32551FA2BEF30071A110 /* WildPokemonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499C32541FA2BEF30071A110 /* WildPokemonViewController.swift */; };
@@ -44,6 +47,13 @@
 		49DB113A201BAE0B00CEC0CB /* CollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DB1139201BAE0B00CEC0CB /* CollectionTests.swift */; };
 		49E9ABC420192CA90038A14D /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E9ABC320192CA90038A14D /* UIImage.swift */; };
 		49E9ABC620192DCC0038A14D /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E9ABC520192DCC0038A14D /* Int.swift */; };
+		49FFBAD6202E085000A7668F /* RealmPokemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FFBAD5202E085000A7668F /* RealmPokemonService.swift */; };
+		49FFBAD8202E11B700A7668F /* WildPokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FFBAD7202E11B700A7668F /* WildPokemon.swift */; };
+		49FFBADA202E11C800A7668F /* CapturedPokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FFBAD9202E11C800A7668F /* CapturedPokemon.swift */; };
+		49FFBADD202EAFE700A7668F /* CaughtPokemonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FFBADC202EAFE700A7668F /* CaughtPokemonViewController.swift */; };
+		49FFBADF202EB00100A7668F /* CaughtPokemonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FFBADE202EB00100A7668F /* CaughtPokemonPresenter.swift */; };
+		49FFBAE1202EB0DF00A7668F /* CaughtPokemonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FFBAE0202EB0DF00A7668F /* CaughtPokemonCell.swift */; };
+		49FFBAE3202EB27400A7668F /* LocalPokemonInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FFBAE2202EB27400A7668F /* LocalPokemonInjection.swift */; };
 		AF7ADDB950EC67B06B554122 /* Pods_RxPokedexTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5221E6B3AC2B3423093DF6D /* Pods_RxPokedexTests.framework */; };
 		C0C5BADBF37882A13CE7FB52 /* Pods_RxPokedex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942E999F77E29425798C5268 /* Pods_RxPokedex.framework */; };
 /* End PBXBuildFile section */
@@ -72,15 +82,18 @@
 		4917787E2012FBF5009D599D /* JSONPokemonResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONPokemonResult.swift; sourceTree = "<group>"; };
 		491778802012FC65009D599D /* JSONPokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONPokemon.swift; sourceTree = "<group>"; };
 		491778822012FDBB009D599D /* Parse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parse.swift; sourceTree = "<group>"; };
-		493312D1202CDA0700360FF4 /* captured.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = captured.gif; sourceTree = "<group>"; };
 		493312D3202CDA9C00360FF4 /* rollingPokeball.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = rollingPokeball.gif; sourceTree = "<group>"; };
+		493312D5202CE96900360FF4 /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
+		493312D7202CEE3500360FF4 /* PersistenceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceError.swift; sourceTree = "<group>"; };
+		494308072032211400D103A0 /* CaughtPokemonSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaughtPokemonSection.swift; sourceTree = "<group>"; };
+		4943080C20324E8E00D103A0 /* CaughtPokemonDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaughtPokemonDataSource.swift; sourceTree = "<group>"; };
+		4943080E2033593800D103A0 /* CaughtPokemonInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaughtPokemonInteractor.swift; sourceTree = "<group>"; };
+		49430810203487E300D103A0 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		494FDE742012E3FE00D0B57D /* WildPokemonDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WildPokemonDataSource.swift; sourceTree = "<group>"; };
 		494FDE762012F57200D0B57D /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		495407F51FA650A000F67BF4 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		495407F71FA652BF00F67BF4 /* WildPokemonSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WildPokemonSection.swift; sourceTree = "<group>"; };
 		495407F91FA76DD100F67BF4 /* WildPokemonInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WildPokemonInteractor.swift; sourceTree = "<group>"; };
-		49562D621FA402D600DDA8E0 /* Randomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Randomizer.swift; sourceTree = "<group>"; };
-		49562D641FA402F600DDA8E0 /* NumberSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSection.swift; sourceTree = "<group>"; };
 		49982A7F201A799C00808EA5 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		499C324F1FA2BEF30071A110 /* RxPokedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxPokedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		499C32521FA2BEF30071A110 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +122,13 @@
 		49DB1139201BAE0B00CEC0CB /* CollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTests.swift; sourceTree = "<group>"; };
 		49E9ABC320192CA90038A14D /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		49E9ABC520192DCC0038A14D /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		49FFBAD5202E085000A7668F /* RealmPokemonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmPokemonService.swift; sourceTree = "<group>"; };
+		49FFBAD7202E11B700A7668F /* WildPokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WildPokemon.swift; sourceTree = "<group>"; };
+		49FFBAD9202E11C800A7668F /* CapturedPokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedPokemon.swift; sourceTree = "<group>"; };
+		49FFBADC202EAFE700A7668F /* CaughtPokemonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaughtPokemonViewController.swift; sourceTree = "<group>"; };
+		49FFBADE202EB00100A7668F /* CaughtPokemonPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaughtPokemonPresenter.swift; sourceTree = "<group>"; };
+		49FFBAE0202EB0DF00A7668F /* CaughtPokemonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaughtPokemonCell.swift; sourceTree = "<group>"; };
+		49FFBAE2202EB27400A7668F /* LocalPokemonInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPokemonInjection.swift; sourceTree = "<group>"; };
 		942E999F77E29425798C5268 /* Pods_RxPokedex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxPokedex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A73193B3EA697A91A4C52A53 /* Pods-RxPokedexUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxPokedexUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxPokedexUITests/Pods-RxPokedexUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C4AF55C77930583F22323800 /* Pods-RxPokedexUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxPokedexUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxPokedexUITests/Pods-RxPokedexUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -157,11 +177,42 @@
 			path = "Json Objects";
 			sourceTree = "<group>";
 		};
+		494308092032211E00D103A0 /* Pokemon */ = {
+			isa = PBXGroup;
+			children = (
+				49B8FDE41FA418BB008C283B /* Pokemon.swift */,
+				49FFBAD7202E11B700A7668F /* WildPokemon.swift */,
+				49FFBAD9202E11C800A7668F /* CapturedPokemon.swift */,
+			);
+			path = Pokemon;
+			sourceTree = "<group>";
+		};
+		4943080A2032212B00D103A0 /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				495407F71FA652BF00F67BF4 /* WildPokemonSection.swift */,
+				494308072032211400D103A0 /* CaughtPokemonSection.swift */,
+			);
+			path = Sections;
+			sourceTree = "<group>";
+		};
+		4943080B20324D3500D103A0 /* Caught Pokemon */ = {
+			isa = PBXGroup;
+			children = (
+				49FFBADC202EAFE700A7668F /* CaughtPokemonViewController.swift */,
+				49FFBADE202EB00100A7668F /* CaughtPokemonPresenter.swift */,
+				4943080C20324E8E00D103A0 /* CaughtPokemonDataSource.swift */,
+				4943080E2033593800D103A0 /* CaughtPokemonInteractor.swift */,
+			);
+			path = "Caught Pokemon";
+			sourceTree = "<group>";
+		};
 		494FDE732012E3C900D0B57D /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				49B8FDE11FA4081E008C283B /* WildPokemonSectionView.swift */,
 				499C32821FA395200071A110 /* WildPokemonCell.swift */,
+				49FFBAE0202EB0DF00A7668F /* CaughtPokemonCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -169,22 +220,15 @@
 		495407F41FA6509100F67BF4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				490AAF83202B54F500BDED68 /* Array.swift */,
+				49982A7F201A799C00808EA5 /* Collection.swift */,
+				49430810203487E300D103A0 /* Dictionary.swift */,
+				49E9ABC520192DCC0038A14D /* Int.swift */,
+				493312D5202CE96900360FF4 /* Realm.swift */,
 				495407F51FA650A000F67BF4 /* UIColor.swift */,
 				49E9ABC320192CA90038A14D /* UIImage.swift */,
-				49E9ABC520192DCC0038A14D /* Int.swift */,
-				49982A7F201A799C00808EA5 /* Collection.swift */,
-				490AAF83202B54F500BDED68 /* Array.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		49562D401FA3D4AF00DDA8E0 /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				49562D621FA402D600DDA8E0 /* Randomizer.swift */,
-				49562D641FA402F600DDA8E0 /* NumberSection.swift */,
-			);
-			path = Utility;
 			sourceTree = "<group>";
 		};
 		499C32461FA2BEF30071A110 = {
@@ -219,10 +263,8 @@
 				49B8FDE81FA4F868008C283B /* Persistence */,
 				49B8FDE31FA418AB008C283B /* Entities */,
 				49B8FDDF1FA407C3008C283B /* Scenes */,
-				49562D401FA3D4AF00DDA8E0 /* Utility */,
+				49FFBADB202E51DA00A7668F /* Resources */,
 				499C32521FA2BEF30071A110 /* AppDelegate.swift */,
-				493312D3202CDA9C00360FF4 /* rollingPokeball.gif */,
-				493312D1202CDA0700360FF4 /* captured.gif */,
 				499C32561FA2BEF30071A110 /* Main.storyboard */,
 				499C32591FA2BEF30071A110 /* Assets.xcassets */,
 				499C325B1FA2BEF30071A110 /* LaunchScreen.storyboard */,
@@ -255,6 +297,7 @@
 			children = (
 				49B8FDEE1FA4FFCF008C283B /* Loading */,
 				49B8FDE01FA407CD008C283B /* Wild Pokemon */,
+				4943080B20324D3500D103A0 /* Caught Pokemon */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -273,8 +316,8 @@
 		49B8FDE31FA418AB008C283B /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				495407F71FA652BF00F67BF4 /* WildPokemonSection.swift */,
-				49B8FDE41FA418BB008C283B /* Pokemon.swift */,
+				4943080A2032212B00D103A0 /* Sections */,
+				494308092032211E00D103A0 /* Pokemon */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -283,6 +326,8 @@
 			isa = PBXGroup;
 			children = (
 				49B8FDE91FA4F87A008C283B /* RealmPokemon.swift */,
+				493312D7202CEE3500360FF4 /* PersistenceError.swift */,
+				49FFBAD5202E085000A7668F /* RealmPokemonService.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -311,6 +356,7 @@
 			children = (
 				49B8FDF11FA50647008C283B /* InjectionMap.swift */,
 				49B8FDF41FA5068F008C283B /* RemotePokemonInjection.swift */,
+				49FFBAE2202EB27400A7668F /* LocalPokemonInjection.swift */,
 			);
 			path = Injection;
 			sourceTree = "<group>";
@@ -331,6 +377,14 @@
 				491778822012FDBB009D599D /* Parse.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		49FFBADB202E51DA00A7668F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				493312D3202CDA9C00360FF4 /* rollingPokeball.gif */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		9CE83215855DC7AAB7DF691E /* Frameworks */ = {
@@ -473,7 +527,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				493312D4202CDA9C00360FF4 /* rollingPokeball.gif in Resources */,
-				493312D2202CDA0700360FF4 /* captured.gif in Resources */,
 				499C325D1FA2BEF30071A110 /* LaunchScreen.storyboard in Resources */,
 				499C325A1FA2BEF30071A110 /* Assets.xcassets in Resources */,
 				499C32581FA2BEF30071A110 /* Main.storyboard in Resources */,
@@ -679,33 +732,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				494308082032211400D103A0 /* CaughtPokemonSection.swift in Sources */,
 				495407F81FA652BF00F67BF4 /* WildPokemonSection.swift in Sources */,
+				49FFBADA202E11C800A7668F /* CapturedPokemon.swift in Sources */,
 				491778832012FDBB009D599D /* Parse.swift in Sources */,
+				4943080D20324E8E00D103A0 /* CaughtPokemonDataSource.swift in Sources */,
 				49B8FDF91FA523CD008C283B /* JSONPokemonDetail.swift in Sources */,
 				49B8FDE51FA418BB008C283B /* Pokemon.swift in Sources */,
-				49562D651FA402F600DDA8E0 /* NumberSection.swift in Sources */,
 				4917787F2012FBF5009D599D /* JSONPokemonResult.swift in Sources */,
 				499C32551FA2BEF30071A110 /* WildPokemonViewController.swift in Sources */,
 				49B8FDF71FA507B5008C283B /* LoadingViewModel.swift in Sources */,
 				494FDE752012E3FE00D0B57D /* WildPokemonDataSource.swift in Sources */,
 				490AAF84202B54F500BDED68 /* Array.swift in Sources */,
+				493312D6202CE96900360FF4 /* Realm.swift in Sources */,
 				49982A80201A799C00808EA5 /* Collection.swift in Sources */,
 				49E9ABC420192CA90038A14D /* UIImage.swift in Sources */,
 				495407F61FA650A000F67BF4 /* UIColor.swift in Sources */,
 				499C32531FA2BEF30071A110 /* AppDelegate.swift in Sources */,
+				4943080F2033593900D103A0 /* CaughtPokemonInteractor.swift in Sources */,
 				49B8FDEA1FA4F87A008C283B /* RealmPokemon.swift in Sources */,
 				491778812012FC65009D599D /* JSONPokemon.swift in Sources */,
 				49B8FDED1FA4FA2A008C283B /* RemotePokemonManager.swift in Sources */,
-				49562D631FA402D600DDA8E0 /* Randomizer.swift in Sources */,
+				49430811203487E300D103A0 /* Dictionary.swift in Sources */,
 				49B8FDE71FA4E6A8008C283B /* WildPokemonPresenter.swift in Sources */,
 				49B8FDF01FA4FFE6008C283B /* LoadingViewController.swift in Sources */,
 				494FDE772012F57200D0B57D /* API.swift in Sources */,
+				49FFBAD8202E11B700A7668F /* WildPokemon.swift in Sources */,
 				499C32831FA395200071A110 /* WildPokemonCell.swift in Sources */,
 				49B8FDF21FA50647008C283B /* InjectionMap.swift in Sources */,
+				49FFBADF202EB00100A7668F /* CaughtPokemonPresenter.swift in Sources */,
 				49B8FDF51FA5068F008C283B /* RemotePokemonInjection.swift in Sources */,
+				49FFBAE1202EB0DF00A7668F /* CaughtPokemonCell.swift in Sources */,
+				49FFBAE3202EB27400A7668F /* LocalPokemonInjection.swift in Sources */,
 				49E9ABC620192DCC0038A14D /* Int.swift in Sources */,
 				495407FA1FA76DD100F67BF4 /* WildPokemonInteractor.swift in Sources */,
+				49FFBAD6202E085000A7668F /* RealmPokemonService.swift in Sources */,
+				493312D8202CEE3500360FF4 /* PersistenceError.swift in Sources */,
 				49B8FDE21FA4081E008C283B /* WildPokemonSectionView.swift in Sources */,
+				49FFBADD202EAFE700A7668F /* CaughtPokemonViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

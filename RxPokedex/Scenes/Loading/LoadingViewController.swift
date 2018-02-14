@@ -12,6 +12,7 @@ import RxCocoa
 
 final class LoadingViewController: UIViewController {
     
+    @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let viewModel = LoadingViewModel()
@@ -38,6 +39,11 @@ final class LoadingViewController: UIViewController {
     }
     
     func setupBindings(){
+        
+        viewModel
+            .title
+            .bind(to: mainLabel.rx.text)
+            .disposed(by: disposeBag)
         
         viewModel
             .loading
@@ -68,7 +74,7 @@ final class LoadingViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let vc = segue.destination as? WildPokemonViewController,
-            let pokemon = sender as? [Pokemon] else {
+            let pokemon = sender as? [WildPokemon] else {
             fatalError("Something went incredibly wrong...")
         }
         vc.injection = pokemon
