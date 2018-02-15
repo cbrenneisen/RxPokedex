@@ -2,8 +2,8 @@
 //  Array.swift
 //  RxPokedex
 //
-//  Created by Carlos Brenneisen on 2/7/18.
-//  Copyright © 2018 carlos.brenneisen. All rights reserved.
+//  Created by Carl Brenneisen on 2/7/18.
+//  Copyright © 2018 carl.brenneisen. All rights reserved.
 //
 
 import Foundation
@@ -32,11 +32,12 @@ extension Array where Element == WildPokemon {
 extension Array where Element: Pokemon {
     
     func alphabetize() -> [String: [Element]] {
-        return reduce(into: [String: [Element]]()) { _ = $0; $0.alphabetize(item: $1) }
+        return reduce(into: [String: [Element]]()){ $0.placeAlphabetically($1) }.alphabetize()
     }
 }
 
 extension Array {
+
     func sectionCounts(maxSections: Int? = nil) -> [Int]{
         if isEmpty { return [] }
         let maxSec = maxSections ?? Swift.max(1, count/4)

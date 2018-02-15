@@ -2,8 +2,8 @@
 //  CaughtPokemonViewModel.swift
 //  RxPokedex
 //
-//  Created by Carlos Brenneisen on 2/9/18.
-//  Copyright © 2018 carlos.brenneisen. All rights reserved.
+//  Created by Carl Brenneisen on 2/9/18.
+//  Copyright © 2018 carl.brenneisen. All rights reserved.
 //
 
 import Foundation
@@ -16,6 +16,7 @@ final class CaughtPokemonPresenter {
     var disposeBag = DisposeBag()
     var interactor: CaughtPokemonInteractor
     var dataSource: CaughtPokemonDataSource
+    var router: CaughtPokemonRouter
     var tvDataSource: RxTableViewSectionedAnimatedDataSource<CapturedPokemonSection>
     
     var sections: Observable<[CapturedPokemonSection]>{
@@ -27,9 +28,14 @@ final class CaughtPokemonPresenter {
     }
     
     init() {
+        self.router = CaughtPokemonRouter()
         self.interactor = CaughtPokemonInteractor()
         self.dataSource = CaughtPokemonDataSource()
         self.tvDataSource = RxTableViewSectionedAnimatedDataSource(configureCell: dataSource.configureCell())
         tvDataSource.titleForHeaderInSection = dataSource.configureSection()
+    }
+    
+    func update(vc: UIViewController) {
+        router.viewController = vc
     }
 }

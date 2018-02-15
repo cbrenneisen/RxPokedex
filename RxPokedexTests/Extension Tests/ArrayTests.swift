@@ -1,15 +1,14 @@
 //
-//  RxPokedexTests.swift
+//  ArrayTests.swift
 //  RxPokedexTests
 //
-//  Created by Carl Brenneisen on 10/26/17.
-//  Copyright © 2017 carl.brenneisen. All rights reserved.
+//  Created by Carl Brenneisen on 2/15/18.
+//  Copyright © 2018 carl.brenneisen. All rights reserved.
 //
 
 import XCTest
-@testable import RxPokedex
 
-class RxPokedexTests: XCTestCase {
+class ArrayTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

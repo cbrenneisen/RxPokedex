@@ -2,8 +2,8 @@
 //  CaughtPokemonCell.swift
 //  RxPokedex
 //
-//  Created by Carlos Brenneisen on 2/9/18.
-//  Copyright © 2018 carlos.brenneisen. All rights reserved.
+//  Created by Carl Brenneisen on 2/9/18.
+//  Copyright © 2018 carl.brenneisen. All rights reserved.
 //
 
 import UIKit
@@ -18,7 +18,10 @@ final class CaughtPokemonCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        pokemonImageView.layer.cornerRadius = pokemonImageView.frame.size.width/2
+        pokemonImageView.layer.borderWidth = 1.0
+        pokemonImageView.layer.borderColor = UIColor.lightGray.cgColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -32,6 +35,6 @@ final class CaughtPokemonCell: UITableViewCell {
             with: pokemon.imageURL,
             placeholder: UIImage.Image.placeholder)
         
-        nameLabel.text = pokemon.name
+        nameLabel.text = pokemon.name.capitalized
     }
 }

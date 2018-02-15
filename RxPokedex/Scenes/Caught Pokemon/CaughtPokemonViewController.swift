@@ -2,8 +2,8 @@
 //  CaughtPokemonViewController.swift
 //  RxPokedex
 //
-//  Created by Carlos Brenneisen on 2/9/18.
-//  Copyright © 2018 carlos.brenneisen. All rights reserved.
+//  Created by Carl Brenneisen on 2/9/18.
+//  Copyright © 2018 carl.brenneisen. All rights reserved.
 //
 
 import UIKit
@@ -14,12 +14,15 @@ final class CaughtPokemonViewController: UIViewController {
 
     @IBOutlet weak var pokemonTableView: UITableView!
     
+    let tvDelegate = CaughtPokemonTableViewDelegate()
     let presenter = CaughtPokemonPresenter()
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        pokemonTableView.delegate = tvDelegate
+        presenter.update(vc: self)
         setupBindings()
     }
 
@@ -27,7 +30,6 @@ final class CaughtPokemonViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     private func setupBindings(){
         presenter
@@ -46,5 +48,6 @@ final class CaughtPokemonViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
+
+

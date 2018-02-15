@@ -2,8 +2,8 @@
 //  RxPokedexUITests.swift
 //  RxPokedexUITests
 //
-//  Created by Carlos Brenneisen on 10/26/17.
-//  Copyright © 2017 carlos.brenneisen. All rights reserved.
+//  Created by Carl Brenneisen on 10/26/17.
+//  Copyright © 2017 carl.brenneisen. All rights reserved.
 //
 
 import XCTest

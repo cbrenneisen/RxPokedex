@@ -2,8 +2,8 @@
 //  Pokemon.swift
 //  RxPokedex
 //
-//  Created by Carlos Brenneisen on 10/27/17.
-//  Copyright © 2017 carlos.brenneisen. All rights reserved.
+//  Created by Carl Brenneisen on 10/27/17.
+//  Copyright © 2017 carl.brenneisen. All rights reserved.
 //
 
 import Foundation
@@ -35,22 +35,4 @@ extension Pokemon {
         return URL(string: imagePath)
     }
 }
-
-
-/**
- Extension to make Pokemon objects play with RxDatasources
-*/
-//extension Pokemon: IdentifiableType, Equatable {
-//
-//    typealias Identity = Int
-//
-//    var identity: Int {
-//        return number
-//    }
-//
-//    static func ==(lhs: Pokemon, rhs: Pokemon) -> Bool {
-//        return lhs.number == rhs.number && lhs.date == rhs.date
-//    }
-//}
-
 

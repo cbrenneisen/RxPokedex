@@ -2,8 +2,8 @@
 //  JSONPokemon.swift
 //  RxPokedex
 //
-//  Created by Carlos Brenneisen on 1/19/18.
-//  Copyright © 2018 carlos.brenneisen. All rights reserved.
+//  Created by Carl Brenneisen on 1/19/18.
+//  Copyright © 2018 carl.brenneisen. All rights reserved.
 //
 
 import Foundation
