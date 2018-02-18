@@ -23,6 +23,7 @@
 		494308152035D28E00D103A0 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494308142035D28E00D103A0 /* ArrayTests.swift */; };
 		4943081B20360F1100D103A0 /* CaughtPokemonTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943081A20360F1100D103A0 /* CaughtPokemonTableViewDelegate.swift */; };
 		4943081D20361D1E00D103A0 /* CaughtPokemonRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943081C20361D1E00D103A0 /* CaughtPokemonRouter.swift */; };
+		4943081F2036492D00D103A0 /* WildPokemonRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943081E2036492D00D103A0 /* WildPokemonRouter.swift */; };
 		494FDE752012E3FE00D0B57D /* WildPokemonDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494FDE742012E3FE00D0B57D /* WildPokemonDataSource.swift */; };
 		494FDE772012F57200D0B57D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494FDE762012F57200D0B57D /* API.swift */; };
 		495407F61FA650A000F67BF4 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495407F51FA650A000F67BF4 /* UIColor.swift */; };
@@ -95,6 +96,7 @@
 		494308142035D28E00D103A0 /* ArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
 		4943081A20360F1100D103A0 /* CaughtPokemonTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaughtPokemonTableViewDelegate.swift; sourceTree = "<group>"; };
 		4943081C20361D1E00D103A0 /* CaughtPokemonRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaughtPokemonRouter.swift; sourceTree = "<group>"; };
+		4943081E2036492D00D103A0 /* WildPokemonRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WildPokemonRouter.swift; sourceTree = "<group>"; };
 		494FDE742012E3FE00D0B57D /* WildPokemonDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WildPokemonDataSource.swift; sourceTree = "<group>"; };
 		494FDE762012F57200D0B57D /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		495407F51FA650A000F67BF4 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				49B8FDE61FA4E6A8008C283B /* WildPokemonPresenter.swift */,
 				495407F91FA76DD100F67BF4 /* WildPokemonInteractor.swift */,
 				494FDE742012E3FE00D0B57D /* WildPokemonDataSource.swift */,
+				4943081E2036492D00D103A0 /* WildPokemonRouter.swift */,
 			);
 			path = "Wild Pokemon";
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				491778832012FDBB009D599D /* Parse.swift in Sources */,
 				4943080D20324E8E00D103A0 /* CaughtPokemonDataSource.swift in Sources */,
 				4943081B20360F1100D103A0 /* CaughtPokemonTableViewDelegate.swift in Sources */,
+				4943081F2036492D00D103A0 /* WildPokemonRouter.swift in Sources */,
 				49B8FDF91FA523CD008C283B /* JSONPokemonDetail.swift in Sources */,
 				49B8FDE51FA418BB008C283B /* Pokemon.swift in Sources */,
 				4917787F2012FBF5009D599D /* JSONPokemonResult.swift in Sources */,

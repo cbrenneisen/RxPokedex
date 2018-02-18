@@ -21,23 +21,11 @@ final class LoadingViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupUI()
-        setupBindings()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        //once we segue away, there is no use doing anything in this screen anymore
-        finish()
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
     }
     
     //MARK: - Setup
-    func setupUI(){
-        activityIndicator.hidesWhenStopped = true
-        navigationController?.navigationBar.isHidden = true
-    }
-    
     func setupBindings(){
         
         viewModel
@@ -50,33 +38,9 @@ final class LoadingViewController: UIViewController {
             .asDriver(onErrorJustReturn: true)
             .drive(activityIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
-        
-        viewModel
-            .gatheredPokemon
-            .asDriver(onErrorJustReturn: [])
-            .drive(onNext: { [unowned self] pokemon in
-                self.continueWith(pokemon: pokemon)
-            }).disposed(by: disposeBag)
     }
     
-    private func finish(){
-        disposeBag = DisposeBag()
-        viewModel.sleep()
-    }
-
-    //MARK: - Navigation
-    
-    //Once we receive some pokemon, proceed to the next screen
-    private func continueWith(pokemon: [Pokemon]){
-        performSegue(withIdentifier: "WildPokemonSegue", sender: pokemon)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        guard let vc = segue.destination as? WildPokemonViewController,
-            let pokemon = sender as? [WildPokemon] else {
-            fatalError("Something went incredibly wrong...")
-        }
-        vc.injection = pokemon
+    func set(loading: Bool){
+        viewModel.set(loading: loading)
     }
 }

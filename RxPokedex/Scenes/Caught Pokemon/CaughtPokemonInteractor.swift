@@ -8,13 +8,14 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 import RxDataSources
 
 final class CaughtPokemonInteractor: LocalPokemonServiceInjected {
-    
+        
     var pokemon: Observable<[CapturedPokemon]> { return currentPokemon.asObservable() }
-    var currentPokemon: Variable<[CapturedPokemon]>
-    var disposeBag = DisposeBag()
+    private var currentPokemon: Variable<[CapturedPokemon]>
+    private var disposeBag = DisposeBag()
     
     init(){
         currentPokemon = Variable([])
@@ -28,12 +29,8 @@ final class CaughtPokemonInteractor: LocalPokemonServiceInjected {
             .localPokemon
             .bind(to: currentPokemon)
             .disposed(by: disposeBag)
-//        //TODO - figure out why 'bind' doesn't work here
-//        localPokemonService
-//            .localPokemon
-//            .subscribe(onNext: { [weak self] localPokemon in
-//                self?.currentPokemon.value = localPokemon
-//            }).disposed(by: disposeBag)
+        
+        
 
     }
     

@@ -7,9 +7,19 @@
 //
 
 import UIKit
+import RxSwift
+
+fileprivate struct Routes {
+    
+    static let loading = "LoadingSegue"
+}
+
 
 final class CaughtPokemonRouter {
     
     weak var viewController: UIViewController?
+    
+    let loading = BehaviorSubject<Bool>(value: false)
+    
     
 }

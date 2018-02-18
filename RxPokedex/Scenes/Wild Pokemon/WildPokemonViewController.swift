@@ -18,7 +18,6 @@ final class WildPokemonViewController: UIViewController {
     @IBOutlet weak var refreshButton: UIButton!
     
     //MARK: Flow
-    var injection: [WildPokemon]?
     var presenter: WildPokemonPresenter!
     
     let disposeBag = DisposeBag()
@@ -26,7 +25,7 @@ final class WildPokemonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter = WildPokemonPresenter(initialData: injection ?? [])
+        presenter = WildPokemonPresenter(vc: self)
         setupUI()
         setupBindings()
     }

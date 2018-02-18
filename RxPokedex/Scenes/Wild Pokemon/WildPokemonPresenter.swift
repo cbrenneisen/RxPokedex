@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 import RxDataSources
 import RandomKit
 
@@ -26,18 +27,29 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
             .map({ $1.shuffle() })
     }
     
+    var state: Driver<WildPokemonState> {
+        return Observable
+            .combineLatest(loading, error)
+            .map({ WildPokemonState(loading: $0, error: $1) })
+            .asDriver(onErrorJustReturn: .error)
+    }
+    
+    private var error = BehaviorSubject<Bool>(value: false)
+    private var loading = BehaviorSubject<Bool>(value: true)
+    
     //MARK: Architecture
     private let interactor: WildPokemonInteractor
     private let dataSource: WildPokemonDataSource
+    private let router: WildPokemonRouter
     let cvDataSource: RxCollectionViewSectionedAnimatedDataSource<WildPokemonSection>
     
     //MARK: Internals
     private let shuffler = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
     private let disposeBag = DisposeBag()
         
-    init(initialData: [WildPokemon] = []){
-        
-        self.interactor = WildPokemonInteractor(initialData: initialData)
+    init(vc: UIViewController?){
+        self.interactor = WildPokemonInteractor()
+        self.router = WildPokemonRouter(vc: vc)
         self.dataSource = WildPokemonDataSource()
         self.cvDataSource = RxCollectionViewSectionedAnimatedDataSource(
             configureCell: dataSource.configureCell(),
@@ -47,12 +59,32 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
     
     func setupObservers(){
         
+        interactor
+            .pokemon
+            .map{ $0.isEmpty }
+            .bind(to: loading)
+            .disposed(by: disposeBag)
+        
+        interactor
+            .error
+            .map{ !$0.isEmpty }
+            .bind(to: error)
+            .disposed(by: disposeBag)
+        
         dataSource
             .capturedPokemon
             .subscribe(onNext : { [weak self] pokemon in
                 self?.interactor.capture(pokemon: pokemon)
-                //print("Pokemon at \(indexPath.section),\(indexPath.row) tapped ")
             }).disposed(by: disposeBag)
+        
+        state
+            .drive(onNext: { [weak self] state in
+                self?.router.update(state: state)
+            }).disposed(by: disposeBag)
+    }
+    
+    func update(viewController: UIViewController){
+        router.viewController = viewController
     }
     
     

@@ -19,17 +19,16 @@ protocol WildPokemonInteractorInterface {
 
 final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemonServiceInjected, LocalPokemonServiceInjected {
 
+    var error = PublishSubject<String>()
+    
     var pokemon: Observable<[WildPokemon]> { return currentPokemon.asObservable() }
-    var currentPokemon: Variable<[WildPokemon]>
+    var currentPokemon = Variable<[WildPokemon]>([])
 
-    private var page: Int
+    private var page = 0
     private let reloader = Observable<Int>.interval(15, scheduler: MainScheduler.instance)
     private let disposeBag = DisposeBag()
     
-    init(initialData: [WildPokemon]){
-        self.page = initialData.isEmpty ? 0 : 1
-        self.currentPokemon = Variable<[WildPokemon]>(initialData)
-        
+    init(){
         setupObservers()
     }
     
@@ -37,6 +36,7 @@ final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemon
         
         remotePokemonService
             .wildPokemon
+            .ignoreWhen{ $0.isEmpty }
             .bind(to: currentPokemon)
             .disposed(by: disposeBag)
         

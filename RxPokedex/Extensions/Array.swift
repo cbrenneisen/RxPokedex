@@ -19,18 +19,17 @@ extension Array where Element == WildPokemon {
         var pokemon = shuffled(using: &Shuffler.thread.pointee)
         let sections = sectionCounts()
         
-        return sections.enumerated().map({ obj in
+        return sections.enumerated().map { obj in
             let start = sections.count > 1 ? sections[0..<obj.offset].reduce(0, +) : 0
             let end = start + obj.element
             return WildPokemonSection(
                 number: obj.offset,
                 pokemon: Array(pokemon[start..<end]))
-        })
+        }
     }
 }
 
 extension Array where Element: Pokemon {
-    
     func alphabetize() -> [String: [Element]] {
         return reduce(into: [String: [Element]]()){ $0.placeAlphabetically($1) }.alphabetize()
     }
