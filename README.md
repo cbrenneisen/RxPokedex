@@ -1,7 +1,6 @@
 
 # RxPokedex
 
-======================================
 Originally begun as a simple experimentation of RxDataSources, this project has evolved into showcasing what a project built with VIPER, RxSwift, and various Rx community libraries, would look like. 
 
 
