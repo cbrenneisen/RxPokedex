@@ -13,6 +13,10 @@
 		4917787F2012FBF5009D599D /* JSONPokemonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4917787E2012FBF5009D599D /* JSONPokemonResult.swift */; };
 		491778812012FC65009D599D /* JSONPokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491778802012FC65009D599D /* JSONPokemon.swift */; };
 		491778832012FDBB009D599D /* Parse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491778822012FDBB009D599D /* Parse.swift */; };
+		4931DBF9203FB3E70056AA24 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931DBF8203FB3E70056AA24 /* Driver.swift */; };
+		4931DBFD203FB4850056AA24 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931DBFC203FB4850056AA24 /* Observable.swift */; };
+		4931DBFF203FB4BD0056AA24 /* XCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931DBFE203FB4BD0056AA24 /* XCTestCase.swift */; };
+		4931DC04203FB6AF0056AA24 /* MockWildPokemonInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931DC03203FB6AF0056AA24 /* MockWildPokemonInteractor.swift */; };
 		493312D4202CDA9C00360FF4 /* rollingPokeball.gif in Resources */ = {isa = PBXBuildFile; fileRef = 493312D3202CDA9C00360FF4 /* rollingPokeball.gif */; };
 		493312D6202CE96900360FF4 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493312D5202CE96900360FF4 /* Realm.swift */; };
 		493312D8202CEE3500360FF4 /* PersistenceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493312D7202CEE3500360FF4 /* PersistenceError.swift */; };
@@ -86,6 +90,10 @@
 		4917787E2012FBF5009D599D /* JSONPokemonResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONPokemonResult.swift; sourceTree = "<group>"; };
 		491778802012FC65009D599D /* JSONPokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONPokemon.swift; sourceTree = "<group>"; };
 		491778822012FDBB009D599D /* Parse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parse.swift; sourceTree = "<group>"; };
+		4931DBF8203FB3E70056AA24 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
+		4931DBFC203FB4850056AA24 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		4931DBFE203FB4BD0056AA24 /* XCTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCase.swift; sourceTree = "<group>"; };
+		4931DC03203FB6AF0056AA24 /* MockWildPokemonInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWildPokemonInteractor.swift; sourceTree = "<group>"; };
 		493312D3202CDA9C00360FF4 /* rollingPokeball.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = rollingPokeball.gif; sourceTree = "<group>"; };
 		493312D5202CE96900360FF4 /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		493312D7202CEE3500360FF4 /* PersistenceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceError.swift; sourceTree = "<group>"; };
@@ -183,6 +191,49 @@
 				49B8FDF81FA523CD008C283B /* JSONPokemonDetail.swift */,
 			);
 			path = "Json Objects";
+			sourceTree = "<group>";
+		};
+		4931DBFA203FB4690056AA24 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4931DC00203FB5DA0056AA24 /* Mock */,
+				4931DBFB203FB4760056AA24 /* Extensions */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		4931DBFB203FB4760056AA24 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4931DBF8203FB3E70056AA24 /* Driver.swift */,
+				4931DBFC203FB4850056AA24 /* Observable.swift */,
+				4931DBFE203FB4BD0056AA24 /* XCTestCase.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4931DC00203FB5DA0056AA24 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				4931DC02203FB5F40056AA24 /* Interactors */,
+				4931DC01203FB5E40056AA24 /* Presenters */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		4931DC01203FB5E40056AA24 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		4931DC02203FB5F40056AA24 /* Interactors */ = {
+			isa = PBXGroup;
+			children = (
+				4931DC03203FB6AF0056AA24 /* MockWildPokemonInteractor.swift */,
+			);
+			path = Interactors;
 			sourceTree = "<group>";
 		};
 		494308092032211E00D103A0 /* Pokemon */ = {
@@ -286,6 +337,7 @@
 		499C32661FA2BEF30071A110 /* RxPokedexTests */ = {
 			isa = PBXGroup;
 			children = (
+				4931DBFA203FB4690056AA24 /* Helpers */,
 				49DB1136201BADCF00CEC0CB /* Extension Tests */,
 				499C32671FA2BEF30071A110 /* RxPokedexTests.swift */,
 				499C32691FA2BEF30071A110 /* Info.plist */,
@@ -695,9 +747,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RxPokedexTests/Pods-RxPokedexTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
+				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -792,9 +851,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4931DC04203FB6AF0056AA24 /* MockWildPokemonInteractor.swift in Sources */,
+				4931DBF9203FB3E70056AA24 /* Driver.swift in Sources */,
 				490340F72028E7D700F90214 /* IntTests.swift in Sources */,
 				494308152035D28E00D103A0 /* ArrayTests.swift in Sources */,
+				4931DBFF203FB4BD0056AA24 /* XCTestCase.swift in Sources */,
 				499C32681FA2BEF30071A110 /* RxPokedexTests.swift in Sources */,
+				4931DBFD203FB4850056AA24 /* Observable.swift in Sources */,
 				49DB113A201BAE0B00CEC0CB /* CollectionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -983,7 +1046,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F3749E0C081F64AEEFF81BFA /* Pods-RxPokedexTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = RxPokedexTests/Info.plist;
@@ -1000,7 +1063,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D578E42A49C4285A1E54D02F /* Pods-RxPokedexTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = RxPokedexTests/Info.plist;

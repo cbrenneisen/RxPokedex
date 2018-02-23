@@ -13,16 +13,14 @@ import RandomKit
 
 protocol WildPokemonInteractorInterface {
     
-    var pokemon: Observable<[WildPokemon]> { get }
+    var pokemon: BehaviorRelay<[WildPokemon]> { get }
     func capture(pokemon: WildPokemon)
 }
 
 final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemonServiceInjected, LocalPokemonServiceInjected {
 
     var error = PublishSubject<String>()
-    
-    var pokemon: Observable<[WildPokemon]> { return currentPokemon.asObservable() }
-    var currentPokemon = Variable<[WildPokemon]>([])
+    var pokemon = BehaviorRelay<[WildPokemon]>(value: [])
 
     private var page = 0
     private let reloader = Observable<Int>.interval(15, scheduler: MainScheduler.instance)
@@ -37,7 +35,7 @@ final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemon
         remotePokemonService
             .wildPokemon
             .ignoreWhen{ $0.isEmpty }
-            .bind(to: currentPokemon)
+            .bind(to: pokemon)
             .disposed(by: disposeBag)
         
         reloader
@@ -54,7 +52,8 @@ final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemon
     
     func capture(pokemon: WildPokemon) {
         print("Captured \(pokemon.name)!")
-        currentPokemon.value = currentPokemon.value.filter({ $0.uuid != pokemon.uuid })
+        self.pokemon.accept(self.pokemon.value.filter({ $0.uuid != pokemon.uuid }))
+
         localPokemonService.capture(pokemon: pokemon){ error in
             //TODO: handle error
             if let e = error {

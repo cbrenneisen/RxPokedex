@@ -1,8 +1,11 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '10.0'
 
+# ignore warnings from cocoapods
+inhibit_all_warnings!
+
 target 'RxPokedex' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  
   use_frameworks!
 
   # Pods for RxPokedex
@@ -22,6 +25,9 @@ target 'RxPokedex' do
   target 'RxPokedexTests' do
     inherit! :search_paths
     # Pods for testing
+
+    pod 'RxTest'
+    pod 'RxBlocking' 
   end
 
   target 'RxPokedexUITests' do
