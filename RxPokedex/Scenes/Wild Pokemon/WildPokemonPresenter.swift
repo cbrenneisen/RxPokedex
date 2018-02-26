@@ -38,18 +38,17 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
     private var loading = BehaviorSubject<Bool>(value: true)
     
     //MARK: Architecture
-    private let interactor: WildPokemonInteractor
+    private var interactor: WildPokemonInteractor!
     private let dataSource: WildPokemonDataSource
-    private let router: WildPokemonRouter
+    var router: WildPokemonRouter!
     let cvDataSource: RxCollectionViewSectionedAnimatedDataSource<WildPokemonSection>
     
     //MARK: Internals
     private let shuffler = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
     private let disposeBag = DisposeBag()
         
-    init(vc: UIViewController?){
-        self.interactor = WildPokemonInteractor()
-        self.router = WildPokemonRouter(vc: vc)
+    init(router: WildPokemonRouter, interactor: WildPokemonInteractor){
+        self.router = WildPokemonRouter()
         self.dataSource = WildPokemonDataSource()
         self.cvDataSource = RxCollectionViewSectionedAnimatedDataSource(
             configureCell: dataSource.configureCell(),

@@ -25,7 +25,6 @@ final class WildPokemonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter = WildPokemonPresenter(vc: self)
         setupUI()
         setupBindings()
     }

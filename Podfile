@@ -11,16 +11,18 @@ target 'RxPokedex' do
   # Pods for RxPokedex
 
     pod 'Alamofire'
-    pod 'RealmSwift'
     pod 'Kingfisher' 
     pod 'RandomKit'
+    pod 'RealmSwift'
     pod 'RxSwift'
     pod 'RxCocoa'
     pod 'RxDataSources'
     pod 'RxAlamofire'
     pod 'RxRealm'
     pod 'RxSwiftExt'
-    pod 'RxGesture'    
+    pod 'RxGesture' 
+    pod 'Swinject'
+    pod 'SwinjectStoryboard'    
 
   target 'RxPokedexTests' do
     inherit! :search_paths

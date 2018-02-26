@@ -17,8 +17,9 @@ protocol WildPokemonInteractorInterface {
     func capture(pokemon: WildPokemon)
 }
 
-final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemonServiceInjected, LocalPokemonServiceInjected {
+final class WildPokemonInteractor: WildPokemonInteractorInterface, LocalPokemonServiceInjected {
 
+    var remoteService: RemotePokemonService!
     var error = PublishSubject<String>()
     var pokemon = BehaviorRelay<[WildPokemon]>(value: [])
 
@@ -26,13 +27,14 @@ final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemon
     private let reloader = Observable<Int>.interval(15, scheduler: MainScheduler.instance)
     private let disposeBag = DisposeBag()
     
-    init(){
+    init(remoteService: RemotePokemonService){
+        self.remoteService = remoteService
         setupObservers()
     }
     
     private func setupObservers(){
         
-        remotePokemonService
+        remoteService
             .wildPokemon
             .ignoreWhen{ $0.isEmpty }
             .bind(to: pokemon)
@@ -46,7 +48,7 @@ final class WildPokemonInteractor: WildPokemonInteractorInterface, RemotePokemon
         
     private func refreshPokemon() {
         print("requesting: \(page)")
-        remotePokemonService.requestPokemon(page: page)
+        remoteService.requestPokemon(page: page)
         page +=  1
     }
     

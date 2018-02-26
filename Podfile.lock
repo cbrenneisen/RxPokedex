@@ -37,6 +37,9 @@ PODS:
   - RxTest (4.1.2):
     - RxSwift (~> 4.0)
   - ShiftOperations (1.0.2)
+  - Swinject (2.2.0)
+  - SwinjectStoryboard (1.1.2):
+    - Swinject (~> 2.1)
   - Threadly (1.2.0)
 
 DEPENDENCIES:
@@ -53,6 +56,8 @@ DEPENDENCIES:
   - RxSwift
   - RxSwiftExt
   - RxTest
+  - Swinject
+  - SwinjectStoryboard
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
@@ -71,8 +76,10 @@ SPEC CHECKSUMS:
   RxSwiftExt: a9b9c8e94be009146707f9fcb16eaf3cc1f3910c
   RxTest: e634f15fd2c2cd0e0120132ef7a4f7be69ad0393
   ShiftOperations: 702c9aa98d3b20d98dceb71dd8437b562f7ab3ad
+  Swinject: 4ca48bca7de5f398229a26abe1ac902b9f3ee541
+  SwinjectStoryboard: 92e75763c3299cdf627bef98a5180dc894864336
   Threadly: b772ed7c1ff4a3f03eb4600bbc5ef83b3be5cb29
 
-PODFILE CHECKSUM: 28289ad7510a62291dc127903f7695106f2c1aee
+PODFILE CHECKSUM: 74dbcfa6757f0a2821e769e581005bc33284790b
 
 COCOAPODS: 1.4.0

@@ -30,11 +30,7 @@ enum WildPokemonState {
 final class WildPokemonRouter {
 
     weak var viewController: UIViewController?
-    
-    init(vc: UIViewController?) {
-        viewController = vc
-    }
-    
+        
     func update(state: WildPokemonState){
         switch state {
         case .hasData:

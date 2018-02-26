@@ -52,6 +52,7 @@
 		49B8FDF51FA5068F008C283B /* RemotePokemonInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B8FDF41FA5068F008C283B /* RemotePokemonInjection.swift */; };
 		49B8FDF71FA507B5008C283B /* LoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B8FDF61FA507B5008C283B /* LoadingViewModel.swift */; };
 		49B8FDF91FA523CD008C283B /* JSONPokemonDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B8FDF81FA523CD008C283B /* JSONPokemonDetail.swift */; };
+		49C728902043AA16005C1383 /* SwinjectStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7288F2043AA16005C1383 /* SwinjectStoryboard.swift */; };
 		49DB113A201BAE0B00CEC0CB /* CollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DB1139201BAE0B00CEC0CB /* CollectionTests.swift */; };
 		49E9ABC420192CA90038A14D /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E9ABC320192CA90038A14D /* UIImage.swift */; };
 		49E9ABC620192DCC0038A14D /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E9ABC520192DCC0038A14D /* Int.swift */; };
@@ -135,6 +136,7 @@
 		49B8FDF41FA5068F008C283B /* RemotePokemonInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePokemonInjection.swift; sourceTree = "<group>"; };
 		49B8FDF61FA507B5008C283B /* LoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewModel.swift; sourceTree = "<group>"; };
 		49B8FDF81FA523CD008C283B /* JSONPokemonDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONPokemonDetail.swift; sourceTree = "<group>"; };
+		49C7288F2043AA16005C1383 /* SwinjectStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwinjectStoryboard.swift; sourceTree = "<group>"; };
 		49DB1139201BAE0B00CEC0CB /* CollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTests.swift; sourceTree = "<group>"; };
 		49E9ABC320192CA90038A14D /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		49E9ABC520192DCC0038A14D /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				49B8FDF11FA50647008C283B /* InjectionMap.swift */,
 				49B8FDF41FA5068F008C283B /* RemotePokemonInjection.swift */,
 				49FFBAE2202EB27400A7668F /* LocalPokemonInjection.swift */,
+				49C7288F2043AA16005C1383 /* SwinjectStoryboard.swift */,
 			);
 			path = Injection;
 			sourceTree = "<group>";
@@ -716,6 +719,8 @@
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwiftExt/RxSwiftExt.framework",
 				"${BUILT_PRODUCTS_DIR}/ShiftOperations/ShiftOperations.framework",
+				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
+				"${BUILT_PRODUCTS_DIR}/SwinjectStoryboard/SwinjectStoryboard.framework",
 				"${BUILT_PRODUCTS_DIR}/Threadly/Threadly.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -734,6 +739,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwiftExt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ShiftOperations.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwinjectStoryboard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Threadly.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -826,6 +833,7 @@
 				4943080F2033593900D103A0 /* CaughtPokemonInteractor.swift in Sources */,
 				49B8FDEA1FA4F87A008C283B /* RealmPokemon.swift in Sources */,
 				491778812012FC65009D599D /* JSONPokemon.swift in Sources */,
+				49C728902043AA16005C1383 /* SwinjectStoryboard.swift in Sources */,
 				49B8FDED1FA4FA2A008C283B /* RemotePokemonManager.swift in Sources */,
 				49430811203487E300D103A0 /* Dictionary.swift in Sources */,
 				49B8FDE71FA4E6A8008C283B /* WildPokemonPresenter.swift in Sources */,
