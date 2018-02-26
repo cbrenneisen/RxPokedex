@@ -29,16 +29,25 @@ enum WildPokemonState {
 
 final class WildPokemonRouter {
 
-    weak var viewController: UIViewController?
+    private var state: WildPokemonState = .hasData
+    weak var viewController: UIViewController? {
+        didSet {
+            //when the view controller is updated, show the appropriate scene
+            update(state: state)
+        }
+    }
         
     func update(state: WildPokemonState){
-        switch state {
-        case .hasData:
-            clear()
-        case .loading:
-            setLoading()
-        case .error:
-            setError()
+        self.state = state
+        DispatchQueue.main.async {
+            switch state {
+            case .hasData:
+                self.clear()
+            case .loading:
+                self.setLoading()
+            case .error:
+                self.setError()
+            }
         }
     }
     

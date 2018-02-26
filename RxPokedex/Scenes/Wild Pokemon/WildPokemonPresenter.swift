@@ -38,9 +38,9 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
     private var loading = BehaviorSubject<Bool>(value: true)
     
     //MARK: Architecture
-    private var interactor: WildPokemonInteractor!
-    private let dataSource: WildPokemonDataSource
-    var router: WildPokemonRouter!
+    private(set) var interactor: WildPokemonInteractor!
+    private(set) var dataSource: WildPokemonDataSource
+    private(set) var router: WildPokemonRouter!
     let cvDataSource: RxCollectionViewSectionedAnimatedDataSource<WildPokemonSection>
     
     //MARK: Internals
@@ -48,7 +48,8 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
     private let disposeBag = DisposeBag()
         
     init(router: WildPokemonRouter, interactor: WildPokemonInteractor){
-        self.router = WildPokemonRouter()
+        self.router = router
+        self.interactor = interactor
         self.dataSource = WildPokemonDataSource()
         self.cvDataSource = RxCollectionViewSectionedAnimatedDataSource(
             configureCell: dataSource.configureCell(),

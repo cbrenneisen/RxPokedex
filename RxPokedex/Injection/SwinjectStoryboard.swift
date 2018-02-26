@@ -36,11 +36,9 @@ extension SwinjectStoryboard {
         
         //View Controller
         //Inject with the presenter from above and update the presenter's view controller
-        defaultContainer.register(WildPokemonViewController.self ) { r in
-            let controller = WildPokemonViewController()
-            controller.presenter = r.resolve(WildPokemonPresenter.self)
-            controller.presenter.router.viewController = controller
-            return controller
+        defaultContainer.storyboardInitCompleted(WildPokemonViewController.self) { r, c in
+            c.presenter = r.resolve(WildPokemonPresenter.self)!
+            c.presenter.router.viewController = c
         }
     }
 }

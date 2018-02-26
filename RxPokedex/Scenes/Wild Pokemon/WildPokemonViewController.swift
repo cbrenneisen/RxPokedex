@@ -19,6 +19,7 @@ final class WildPokemonViewController: UIViewController {
     
     //MARK: Flow
     var presenter: WildPokemonPresenter!
+    static let identifier = "WildPokemonViewController"
     
     let disposeBag = DisposeBag()
     
