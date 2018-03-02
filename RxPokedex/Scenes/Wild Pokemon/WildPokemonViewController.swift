@@ -25,6 +25,7 @@ final class WildPokemonViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.update(viewController: self)
         
         setupUI()
         setupBindings()
@@ -51,7 +52,7 @@ final class WildPokemonViewController: UIViewController {
 
         navigationItem.hidesBackButton = true
         guard let nav = navigationController else { return }
-        nav.navigationBar.isHidden = false
+        nav.navigationBar.isHidden = true
         nav.navigationBar.tintColor = UIColor.white
         nav.navigationBar.barTintColor = UIColor.navColor
         nav.navigationBar.isTranslucent = false

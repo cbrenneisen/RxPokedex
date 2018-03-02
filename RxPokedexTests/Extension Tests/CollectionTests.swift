@@ -14,17 +14,7 @@ fileprivate struct RandomUtil {
     static let thread = Xoroshiro.threadLocal
 }
 
-class CollectionTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+final class CollectionTests: XCTestCase {
     
     //MARK: - Test INT Collections
     
@@ -128,6 +118,15 @@ class CollectionTests: XCTestCase {
         
         XCTAssertEqual(result, target, "Array should fit into target")
     }
+    
+    func testIntFitAlready(){
+        let nums = [5, 7, 8]
+        let target = 20
+        let result = nums.fit(into: target)
+        
+        XCTAssertEqual(nums, result, "Arrays should bee equal because the sum is equal to the target")
+    }
+
 
     //MARK: Double
     func testDoubleFitOne(){
@@ -154,12 +153,4 @@ class CollectionTests: XCTestCase {
         
         XCTAssertEqual(result, target, "Array should fit into target")
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }

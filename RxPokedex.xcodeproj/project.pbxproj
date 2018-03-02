@@ -12,6 +12,9 @@
 		1246783C20446236007C70BF /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1246783D20446236007C70BF /* RxTest.framework */; };
 		1246783E20446243007C70BF /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1246783F20446243007C70BF /* Swinject.framework */; };
 		124678402044624A007C70BF /* SwinjectStoryboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124678412044624A007C70BF /* SwinjectStoryboard.framework */; };
+		12855F582047128600C6A6F8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12855F572047128600C6A6F8 /* ViewController.swift */; };
+		12CA4AD420475C08002D8022 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CA4AD320475C08002D8022 /* ViewControllerTests.swift */; };
+		12CA4AD6204765D8002D8022 /* DictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CA4AD5204765D8002D8022 /* DictionaryTests.swift */; };
 		3B860CE2B3095EA49462DCC1 /* Pods_RxPokedexUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0075F47ED3DC97C87772879 /* Pods_RxPokedexUITests.framework */; };
 		490340F72028E7D700F90214 /* IntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490340F62028E7D700F90214 /* IntTests.swift */; };
 		490AAF84202B54F500BDED68 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490AAF83202B54F500BDED68 /* Array.swift */; };
@@ -95,6 +98,9 @@
 		1246783D20446236007C70BF /* RxTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1246783F20446243007C70BF /* Swinject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swinject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		124678412044624A007C70BF /* SwinjectStoryboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwinjectStoryboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		12855F572047128600C6A6F8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		12CA4AD320475C08002D8022 /* ViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTests.swift; sourceTree = "<group>"; };
+		12CA4AD5204765D8002D8022 /* DictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTests.swift; sourceTree = "<group>"; };
 		334B65F491911DA2D67F1D2E /* Pods-RxPokedex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxPokedex.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxPokedex/Pods-RxPokedex.debug.xcconfig"; sourceTree = "<group>"; };
 		490340F62028E7D700F90214 /* IntTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntTests.swift; sourceTree = "<group>"; };
 		490AAF83202B54F500BDED68 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -312,6 +318,7 @@
 				493312D5202CE96900360FF4 /* Realm.swift */,
 				495407F51FA650A000F67BF4 /* UIColor.swift */,
 				49E9ABC320192CA90038A14D /* UIImage.swift */,
+				12855F572047128600C6A6F8 /* ViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -455,7 +462,9 @@
 			children = (
 				494308142035D28E00D103A0 /* ArrayTests.swift */,
 				49DB1139201BAE0B00CEC0CB /* CollectionTests.swift */,
+				12CA4AD5204765D8002D8022 /* DictionaryTests.swift */,
 				490340F62028E7D700F90214 /* IntTests.swift */,
+				12CA4AD320475C08002D8022 /* ViewControllerTests.swift */,
 			);
 			path = "Extension Tests";
 			sourceTree = "<group>";
@@ -838,6 +847,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				494308082032211400D103A0 /* CaughtPokemonSection.swift in Sources */,
+				12855F582047128600C6A6F8 /* ViewController.swift in Sources */,
 				495407F81FA652BF00F67BF4 /* WildPokemonSection.swift in Sources */,
 				4943081D20361D1E00D103A0 /* CaughtPokemonRouter.swift in Sources */,
 				49FFBADA202E11C800A7668F /* CapturedPokemon.swift in Sources */,
@@ -886,6 +896,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12CA4AD420475C08002D8022 /* ViewControllerTests.swift in Sources */,
 				4931DC04203FB6AF0056AA24 /* MockWildPokemonInteractor.swift in Sources */,
 				4931DBF9203FB3E70056AA24 /* Driver.swift in Sources */,
 				490340F72028E7D700F90214 /* IntTests.swift in Sources */,
@@ -893,6 +904,7 @@
 				494308152035D28E00D103A0 /* ArrayTests.swift in Sources */,
 				4931DBFF203FB4BD0056AA24 /* XCTestCase.swift in Sources */,
 				499C32681FA2BEF30071A110 /* RxPokedexTests.swift in Sources */,
+				12CA4AD6204765D8002D8022 /* DictionaryTests.swift in Sources */,
 				4931DBFD203FB4850056AA24 /* Observable.swift in Sources */,
 				49DB113A201BAE0B00CEC0CB /* CollectionTests.swift in Sources */,
 			);

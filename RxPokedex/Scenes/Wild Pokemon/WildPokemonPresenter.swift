@@ -15,6 +15,7 @@ import RandomKit
 protocol WildPokemonPresenterInterface: class {
     
     var sections: Observable<[WildPokemonSection]> { get }
+    var state: Driver<WildPokemonState> { get }
     var cvDataSource: RxCollectionViewSectionedAnimatedDataSource<WildPokemonSection> { get }
 }
 
@@ -34,13 +35,14 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
             .asDriver(onErrorJustReturn: .error)
     }
     
+    //MARK: Internals
     private var error = BehaviorSubject<Bool>(value: false)
     private var loading = BehaviorSubject<Bool>(value: true)
     
     //MARK: Architecture
-    private(set) var interactor: WildPokemonInteractor!
-    private(set) var dataSource: WildPokemonDataSource
-    private(set) var router: WildPokemonRouter!
+    let interactor: WildPokemonInteractor
+    let dataSource: WildPokemonDataSource
+    let router: WildPokemonRouter
     let cvDataSource: RxCollectionViewSectionedAnimatedDataSource<WildPokemonSection>
     
     //MARK: Internals
@@ -79,13 +81,11 @@ final class WildPokemonPresenter: WildPokemonPresenterInterface {
         
         state
             .drive(onNext: { [weak self] state in
-                self?.router.update(state: state)
+                self?.router.state = state
             }).disposed(by: disposeBag)
     }
     
-    func update(viewController: UIViewController){
+    func update(viewController: WildPokemonViewController){
         router.viewController = viewController
     }
-    
-    
 }

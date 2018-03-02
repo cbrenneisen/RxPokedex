@@ -18,7 +18,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Item-->
+        <!--Wild Pokemon View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="WildPokemonViewController" id="BYZ-38-t0r" customClass="WildPokemonViewController" customModule="RxPokedex" customModuleProvider="target" sceneMemberID="viewController">
@@ -72,7 +72,6 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="PvW-BU-JCc"/>
                     <navigationItem key="navigationItem" id="mZU-hb-g4J">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="kxI-NC-c6f">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HHh-QQ-TsD">
@@ -85,13 +84,13 @@
                     <connections>
                         <outlet property="pokemonCollectionView" destination="wd9-AZ-4VN" id="mUZ-Nf-x4S"/>
                         <outlet property="refreshButton" destination="HHh-QQ-TsD" id="GEA-UF-6sr"/>
-                        <segue destination="2s0-1X-iDA" kind="presentation" identifier="LoadingSegue" modalTransitionStyle="crossDissolve" id="eEP-6B-H2O"/>
-                        <segue destination="9S7-0o-UWJ" kind="presentation" identifier="ErrorSegue" id="dl1-kG-8gb"/>
+                        <segue destination="9S7-0o-UWJ" kind="show" identifier="ErrorSegue" id="dl1-kG-8gb"/>
+                        <segue destination="2s0-1X-iDA" kind="show" identifier="LoadingSegue" id="xKC-4C-Wvk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6" y="885"/>
+            <point key="canvasLocation" x="755" y="885"/>
         </scene>
         <!--Item-->
         <scene sceneID="yyO-rq-SIe">
@@ -182,19 +181,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeQ-MQ-Nqt">
-                                <rect key="frame" x="20" y="122.00000000000001" width="374" height="46.666666666666671"/>
+                                <rect key="frame" x="20" y="166" width="374" height="46.666666666666657"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="😰" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwm-RT-IC4">
-                                <rect key="frame" x="175" y="198" width="65" height="71.666666666666686"/>
+                                <rect key="frame" x="175" y="241.99999999999997" width="65" height="71.666666666666657"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cannot Connect to Network" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GvA-K9-qiv">
-                                <rect key="frame" x="20" y="339" width="374" height="70"/>
+                                <rect key="frame" x="20" y="383" width="374" height="70"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -216,7 +215,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kr2-I2-vlc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1114.4927536231885" y="1290.4891304347827"/>
+            <point key="canvasLocation" x="1742" y="1285"/>
         </scene>
         <!--Loading View Controller-->
         <scene sceneID="aZS-bg-dWR">
@@ -227,10 +226,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="lfi-uG-gRL">
-                                <rect key="frame" x="197" y="368" width="20" height="20"/>
+                                <rect key="frame" x="197" y="365.66666666666669" width="20" height="20"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looking for Pokemon..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTL-ee-dDf">
-                                <rect key="frame" x="20" y="191" width="374" height="35.666666666666657"/>
+                                <rect key="frame" x="20" y="235" width="374" height="35.666666666666686"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -254,7 +253,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jFp-PM-Bwz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1116" y="587"/>
+            <point key="canvasLocation" x="1741" y="544"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Fsa-xw-he2">
@@ -267,12 +266,31 @@
                     </tabBar>
                     <connections>
                         <segue destination="ReV-x0-qtd" kind="relationship" relationship="viewControllers" id="qWF-gf-8gm"/>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="om4-et-C0N"/>
+                        <segue destination="f3c-Py-CsS" kind="relationship" relationship="viewControllers" id="om4-et-C0N"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nck-lO-PDe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-913" y="1175"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="Cap-eI-Bcc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="f3c-Py-CsS" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="PvW-BU-JCc"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sDc-6Q-X8H">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="l7m-94-2Im"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g2r-ri-U6V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5.7971014492753632" y="884.51086956521749"/>
         </scene>
     </scenes>
     <resources>

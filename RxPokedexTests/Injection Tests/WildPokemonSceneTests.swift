@@ -38,7 +38,7 @@ class WildPokemonSceneTests: XCTestCase {
         XCTAssertNotNil(presenter)
         XCTAssertNotNil(presenter?.router)
         XCTAssertNotNil(presenter?.interactor)
-        XCTAssertNotNil(presenter?.interactor?.remoteService)
+        XCTAssertNotNil(presenter?.interactor.remoteService)
     }
     
     func testViewController(){

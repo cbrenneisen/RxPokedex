@@ -8,6 +8,8 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
+import RxSwiftExt
 
 fileprivate struct Routes {
     
@@ -28,62 +30,52 @@ enum WildPokemonState {
 }
 
 final class WildPokemonRouter {
+    
+    //MARK: - exposed variables
 
-    private var state: WildPokemonState = .hasData
-    weak var viewController: UIViewController? {
+    var state: WildPokemonState = .loading {
         didSet {
-            //when the view controller is updated, show the appropriate scene
-            update(state: state)
+            set(state: state)
         }
     }
-        
-    func update(state: WildPokemonState){
-        self.state = state
-        DispatchQueue.main.async {
-            switch state {
-            case .hasData:
-                self.clear()
-            case .loading:
-                self.setLoading()
-            case .error:
-                self.setError()
-            }
+    
+    weak var viewController: WildPokemonViewController? {
+        didSet {
+            set(state: state)
         }
     }
     
     //MARK: - VC Presentations
+    private func set(state: WildPokemonState){
+        guard let vc = viewController else { return }
+        
+        DispatchQueue.main.async {
+            switch state {
+            case .error:
+                self.setError(vc: vc)
+            case .loading:
+                self.setLoading(vc: vc)
+            case .hasData:
+                self.clear(vc: vc)
+            }
+        }
+    }
     
-    private func setLoading(){
-        viewController?.dismiss(animated: false, completion: nil)
-        viewController?.performSegue(withIdentifier: Routes.loading, sender: nil)
+    private func setLoading(vc: UIViewController){
+        clear(vc: vc)
+        vc.performSegue(withIdentifier: Routes.loading, sender: nil)
     }
 
-    private func setError(){
-        //TODO
-        viewController?.dismiss(animated: false, completion: nil)
-        viewController?.performSegue(withIdentifier: Routes.error, sender: nil)
+    private func setError(vc: UIViewController){
+        clear(vc: vc)
+        vc.performSegue(withIdentifier: Routes.error, sender: nil)
     }
     
     //MARK: - VC Clean Up
-    
-    private func clear(){
-        //if there is no presented view controller then there is nothing to do
-        guard let topVC = viewController?.presentedViewController else { return }
+    private func clear(vc: UIViewController){
+        guard !vc.isTopViewController else { return }
         
-        //if we are showing the loading view controller
-        if let loadingVC = topVC as? LoadingViewController {
-            clearLoading(vc: loadingVC)
-        }else {
-            viewController?.dismiss(animated: true, completion: nil)
-        }
-        
-        //TODO: handle error VC
-    }
-    
-    private func clearLoading(vc: LoadingViewController){
-        vc.set(loading: false)
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
-            self.viewController?.dismiss(animated: true, completion: nil)
-        }
+        //if this is NOT the top view controller, then dismiss whatever is on top
+        vc.navigationController?.popViewController(animated: true)
     }
 }

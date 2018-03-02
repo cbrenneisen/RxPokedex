@@ -7,29 +7,52 @@
 //
 
 import XCTest
+import UIKit
+@testable import RxPokedex
 
-class ViewControllerTests: XCTestCase {
+final class ViewControllerTests: XCTestCase {
+    
+    var navigationController: UINavigationController!
+    var viewController: UIViewController!
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
+        navigationController = UINavigationController()
+        viewController = UIViewController()
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    //MARK: - isTopViewController Tests
+    
+    // The view controller has not been added to the navigation controller
+    func testUnadded() {
+        XCTAssertFalse(viewController.isTopViewController, "View Controller should not be added to the navigation stack")
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    // The view controller has been added to the navigation controller
+    func testAdded() {
+        navigationController.pushViewController(viewController, animated: false)
+        XCTAssertTrue(viewController.isTopViewController, "View Controller was should be the top and only controller")
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    // The view controller, along with another one, have been added to the stack
+    func testTwoControllers() {
+        let secondViewController = UIViewController()
+        navigationController.pushViewController(viewController, animated: false)
+        navigationController.pushViewController(secondViewController, animated: false)
+        
+        XCTAssertTrue(secondViewController.isTopViewController, "Second View Controller should be on top")
+        XCTAssertFalse(viewController.isTopViewController, "First View Controller should not be on top")
     }
     
+    // Test pushing one view controller, pushing another, and then removing the last view controller
+    func testPushPushPop() {
+        let secondViewController = UIViewController()
+        navigationController.pushViewController(viewController, animated: false)
+        navigationController.pushViewController(secondViewController, animated: false)
+        navigationController.popViewController(animated: false)
+        
+        XCTAssertFalse(secondViewController.isTopViewController, "Second View Controller should not be in the navigation stack")
+        XCTAssertTrue(viewController.isTopViewController, "First View Controller should now be on top")
+    }
 }
