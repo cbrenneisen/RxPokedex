@@ -7,16 +7,11 @@
 //
 
 import Foundation
-import RandomKit
-
-fileprivate struct Shuffler {
-    static var thread = Xoroshiro.threadLocal
-}
 
 extension Array where Element == WildPokemon {
 
     func shuffle() -> [WildPokemonSection] {
-        var pokemon = shuffled(using: &Shuffler.thread.pointee)
+        var pokemon = shuffled() //(using: &Shuffler.thread.pointee)
         let sections = sectionCounts()
         
         return sections.enumerated().map { obj in
@@ -40,7 +35,10 @@ extension Array {
     func sectionCounts(maxSections: Int? = nil) -> [Int]{
         if isEmpty { return [] }
         let maxSec = maxSections ?? Swift.max(1, count/4)
-        let numSec = Int.random(in: 1...maxSec, using: &Shuffler.thread.pointee)
-        return Swift.Array(randomCount: numSec, in: 1..<count, using: &Shuffler.thread.pointee).fit(into: count)
+        let numSec = Int.random(in: 1...maxSec)
+        //let numSec = Int.random(in: 1...maxSec, using: &Shuffler.thread.pointee)
+        let x = Swift.Array(repeating: 1, count: numSec)
+        return x.fit(into: count)
+//        return Swift.Array(randomCount: numSec, in: 1..<count, using: &Shuffler.thread.pointee).fit(into: count)
     }
 }
