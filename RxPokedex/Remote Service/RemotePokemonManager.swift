@@ -14,6 +14,14 @@ import RxSwiftExt
 
 fileprivate struct RxSession {
     
+    static var session: URLSession {
+        let configuration = URLSessionConfiguration.default
+        let cacheLength = 24 * 60 * 60
+        configuration.httpAdditionalHeaders =  ["Cache-Control" : "public, s-maxage=\(cacheLength)"]
+        configuration.requestCachePolicy = .returnCacheDataElseLoad //data is unlikely to change
+        return URLSession(configuration: configuration)
+    }
+    
     static var manager: SessionManager {
         let configuration = URLSessionConfiguration.default
         let cacheLength = 24 * 60 * 60
@@ -39,7 +47,7 @@ final class RemotePokemonManager: RemotePokemonService {
      
         - parameter page: The offset for which to start searching for Pokemon
      */
-    func requestPokemon(page: Int){
+    func requestPokemon(page: Int) {
         // - fetch the data for the corresponding offset from the server
         // - parse the result into Pokemon objects
         // - filter out nils
@@ -66,11 +74,10 @@ final class RemotePokemonManager: RemotePokemonService {
         // - fetched detailed information for each pokemon, using the detail url
         // - for each response from the server, parse the json dictionary, removing nil entries
         // - convert each json dictionary into a custom Pokemon object
-        
         _ = Observable
             .zip(pokemon.map({ RxSession.manager.rx.data(.get, $0.url)}))
-            .map({ $0.flatMap({ Parse.Pokemon.Detail.single(from: $0) })})
-            .map({ $0.flatMap({( WildPokemon(json: $0))}) })
+            .map({ $0.compactMap({ Parse.Pokemon.Detail.single(from: $0) })})
+            .map({ $0.compactMap({( WildPokemon(json: $0))}) })
             .subscribe(onNext: { [weak self] poke in
                 /// - pass along data
                 self?._wildPokemon.onNext(poke)

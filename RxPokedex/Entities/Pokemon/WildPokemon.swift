@@ -28,7 +28,7 @@ struct WildPokemon: Pokemon {
     init?(json: JSONPokemonDetail){
         
         guard let name = json.forms.first?.name,
-            let image = json.sprites.values.flatMap({$0}).first else {
+            let image = json.sprites.values.compactMap({$0}).first else {
                 return nil
         }
         self.init(number: Int.randomID, name: name, image: image, date: Date())
@@ -41,3 +41,4 @@ extension WildPokemon: IdentifiableType, Equatable {
         return lhs.uuid == rhs.uuid
     }
 }
+

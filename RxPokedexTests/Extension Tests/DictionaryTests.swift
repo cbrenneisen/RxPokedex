@@ -20,7 +20,7 @@ final class DictionaryTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-    }
+    } 
     
     func testEmpty() {
         let dictionary: [String: [CapturedPokemon]] = [:]
@@ -31,7 +31,7 @@ final class DictionaryTests: XCTestCase {
     
     func testNonEmpty(){
         //TODO
-        
+        //let p1 = WildPokemon(
     }
     
     func testPerformanceExample() {

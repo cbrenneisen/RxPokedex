@@ -19,7 +19,7 @@ struct API {
         private static let v2 = "https://pokeapi.co/api/v2/"
         static let current = v2
     }
-    
+        
     struct AllPokemon {
         
         private static let base = "pokemon/"

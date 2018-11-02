@@ -46,9 +46,9 @@ final class WildPokemonViewController: UIViewController {
     private func setupUI(){
         
         //background
-        if let image = UIImage(named: "grass") {
-            view.backgroundColor = UIColor(patternImage: image)
-        }
+//        if let image = UIImage(named: "grass") {
+//            view.backgroundColor = UIColor(patternImage: image)
+//        }
 
         navigationItem.hidesBackButton = true
         guard let nav = navigationController else { return }

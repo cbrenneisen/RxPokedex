@@ -17,7 +17,7 @@ extension Observable {
     // First, the Observable is converted to a a Blocking Observable
     // ... After that, an array of emitted elements is extracted, which may throw an exception
     // ... If an exception is thrown, it is caught and the current test will fail
-    // ... Otherwise, simple return the extracted elements
+    // ... Otherwise, simply return the extracted elements
     
     // return: an array of all emitted elements, in order
     func toBlockingArray(timeout: RxTimeInterval? = nil) -> [Element] {

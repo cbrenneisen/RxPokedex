@@ -16,9 +16,9 @@ class WildPokemonSectionView: UICollectionReusableView {
         super.awakeFromNib()
         
         //background
-        if let image = UIImage(named: "tree") {
-            backgroundColor = UIColor(patternImage: image)
-        }
+//        if let image = UIImage(named: "tree") {
+//            backgroundColor = UIColor(patternImage: image)
+//        }
     }
     
 }

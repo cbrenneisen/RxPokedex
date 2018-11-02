@@ -19,7 +19,7 @@ extension Collection where Element == Double {
 extension Collection where Element == Int  {
     
     func normalize() -> [Double] {
-        return self.flatMap({ Double($0) }).normalize()
+        return self.compactMap{ Double($0) }.normalize()
     }
     
     //decreases and increments numbers accordingly so that they all add up to one number
@@ -52,10 +52,13 @@ extension Collection where Element == Int  {
     }
 }
 
+// - applies to doubles and floats
 extension Collection where Element: FloatingPoint {
     func normalize() -> [Element] {
         guard !isEmpty, let high = self.max(), let low = self.min() else { return [] }
         guard count > 1 else { return [1] }
-        return flatMap({ ($0 - low) / (high - low) })
+        return compactMap({ ($0 - low) / (high - low) })
     }
 }
+
+
