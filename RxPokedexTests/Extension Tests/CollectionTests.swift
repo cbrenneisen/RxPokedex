@@ -7,12 +7,7 @@
 //
 
 import XCTest
-import RandomKit
 @testable import RxPokedex
-
-fileprivate struct RandomUtil {
-    static let thread = Xoroshiro.threadLocal
-}
 
 final class CollectionTests: XCTestCase {
     
@@ -81,7 +76,7 @@ final class CollectionTests: XCTestCase {
         let set = Set(arrayLiteral: 100, 2000)
         let result = set.normalize()
         
-        XCTAssertEqual(result, [0.0, 1.0])
+        XCTAssertEqual(result.sorted(), [0.0, 1.0])
     }
     
     //MARK: - Test Fit Into
@@ -89,7 +84,7 @@ final class CollectionTests: XCTestCase {
     //MARK: Int
     func testFitNone(){
         let nums: [Int] = []
-        let result = nums.fit(into: Int.random(using: &RandomUtil.thread.pointee))
+        let result = nums.fit(into: Int.random)
         
         XCTAssertTrue(result.isEmpty, "Array should be empty")
     }

@@ -8,7 +8,6 @@
 
 import Foundation
 import RxDataSources
-import RandomKit
 
 enum PokemonType {
     case wild

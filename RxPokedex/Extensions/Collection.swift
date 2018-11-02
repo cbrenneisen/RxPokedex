@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RandomKit
 
 extension Collection where Element == Double {
     
